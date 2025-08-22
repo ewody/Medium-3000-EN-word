@@ -1,0 +1,3952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>English Vocabulary Quiz</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --secondary: #7209b7;
+      --success: #06d6a0;
+      --danger: #ef476f;
+      --warning: #ffd166;
+      --dark: #1a1a2e;
+      --light: #f8f9fa;
+      --gray-100: #f1f3f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e0;
+      --gray-500: #a0aec0;
+      --gray-700: #4a5568;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --border-radius: 16px;
+      --transition: all 0.3s ease;
+    }
+
+    /* Dark mode variables */
+    .dark-mode {
+      --primary: #43d4ee;
+      --primary-dark: #3abdd4;
+      --secondary: #9409b7;
+      --success: #1dff7b;
+      --danger: #ff2828;
+      --warning: #ffd166;
+      --dark: #ffffff;
+      --light: #3b3b3b;
+      --gray-100: #303030;
+      --gray-200: #ffffff;
+      --gray-300: #ffffff;
+      --gray-500: #ffffff;
+      --gray-700: #ffffff;
+      --shadow: 0 4px 6px -1px rgba(211, 211, 211, 0.103), 0 2px 4px -1px rgba(0, 0, 0, 0);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0), 0 4px 6px -2px rgba(255, 255, 255, 0);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+      color: var(--dark);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 16px;
+      line-height: 1.5;
+    }
+
+    /* Apply dark mode styles */
+    body.dark-mode {
+      background: linear-gradient(135deg, #2e2e2e 0%, #0f0f0f 100%);
+      color: var(--dark);
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 500px;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 32px);
+    }
+
+    /* Dark mode app container */
+    body.dark-mode .app-container {
+      background: rgb(58, 58, 58);
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    header p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-top: 5px;
+    }
+
+    main {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Statistiques */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat-item {
+      background: var(--gray-100);
+      border-radius: var(--border-radius);
+      padding: 12px 20px;
+      text-align: center;
+      flex: 1;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    /* Dark mode stats */
+    body.dark-mode .stat-item {
+      background: var(--gray-100);
+    }
+
+    .stat-item:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .stat-item span {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-item p {
+      font-size: 0.8rem;
+      color: var(--gray-700);
+      margin-top: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+    }
+
+    /* Carte de quiz */
+    .quizz-card {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 25px 20px;
+      margin-bottom: 25px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray-200);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Dark mode quiz card */
+    body.dark-mode .quizz-card {
+      background: rgb(59, 59, 59);
+      border: 1px solid var(--gray-200);
+    }
+
+    .word-display {
+      text-align: center;
+      margin-bottom: 25px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    #promptLabel {
+      font-size: 1rem;
+      color: var(--gray-500);
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    #currentWord {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 15px 0;
+      word-break: break-word;
+    }
+
+    /* Options de réponse */
+    .options-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .option-btn {
+      padding: 16px 10px;
+      font-size: 1rem;
+      font-weight: 500;
+      border: 2px solid var(--gray-200);
+      background: white;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      box-shadow: var(--shadow);
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark);
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px -2px rgba(0, 0, 0, 0.1);
+    }
+
+    .option-btn.selected {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .option-btn.correct {
+      background-color: var(--success);
+      color: white;
+      border-color: var(--success);
+    }
+
+    .option-btn.incorrect {
+      background-color: var(--danger);
+      color: white;
+      border-color: var(--danger);
+    }
+
+    .option-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    /* Dark mode options */
+    body.dark-mode .option-btn {
+      background: rgb(58, 58, 58);
+      border: 2px solid var(--gray-200);
+      color: var(--dark);
+    }
+
+    body.dark-mode .option-btn.selected {
+      background-color: var(--primary);
+      color: rgb(58, 58, 58);
+    }
+
+    body.dark-mode .option-btn.correct {
+      background-color: var(--success);
+      color: rgb(59, 59, 59);
+    }
+
+    body.dark-mode .option-btn.incorrect {
+      background-color: var(--danger);
+      color: rgb(58, 58, 58);
+    }
+
+    #feedback {
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-align: center;
+      min-height: 1.5em;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: var(--border-radius);
+    }
+
+    /* Progression */
+    .progress-container {
+      margin: 20px 0;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background-color: var(--gray-200);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      width: 0%;
+      transition: width 0.5s ease;
+      border-radius: 10px;
+    }
+
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--gray-700);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    /* Contrôles */
+    .controls {
+      text-align: center;
+      margin: 25px 0;
+      position: relative;
+    }
+
+    #newSeriesBtn {
+      padding: 14px 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: 2px solid var(--primary);
+      background: transparent;
+      color: var(--primary);
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #newSeriesBtn:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .series-info {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: var(--gray-700);
+    }
+
+    .series-info span {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Historique */
+    .history-container {
+      margin-top: 25px;
+      background: var(--gray-100);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .history-container h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: var(--primary);
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      overflow-y: auto;
+      max-height: 150px;
+      padding: 5px;
+    }
+
+    .history-grid p {
+      background: white;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      margin: 0;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      word-break: break-word;
+      color: var(--dark);
+    }
+
+    .history-grid p.correct {
+      border-left: 3px solid var(--success);
+    }
+
+    .history-grid p.incorrect {
+      border-left: 3px solid var(--danger);
+    }
+
+    /* Dark mode history */
+    body.dark-mode .history-container {
+      background: var(--gray-100);
+    }
+
+    body.dark-mode .history-grid p {
+      background: rgb(58, 58, 58);
+      color: var(--dark);
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: var(--gray-100);
+      color: var(--gray-700);
+      font-size: 0.8rem;
+    }
+
+    footer span {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Dark mode footer */
+    body.dark-mode footer {
+      background: var(--gray-100);
+      color: var(--gray-700);
+    }
+
+    body.dark-mode footer span {
+      color: var(--primary);
+    }
+
+    /* Animation pour le feedback */
+    .fade {
+      animation: fadeEffect 0.6s;
+    }
+
+    @keyframes fadeEffect {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Toggle switch styles */
+    .dark-mode-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--primary);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    /* Responsive mobile */
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+      
+      .app-container {
+        min-height: calc(100vh - 24px);
+      }
+      
+      header {
+        padding: 18px 15px;
+      }
+      
+      header h1 {
+        font-size: 1.3rem;
+      }
+      
+      main {
+        padding: 15px;
+      }
+      
+      .stats {
+        gap: 10px;
+      }
+      
+      .stat-item {
+        padding: 10px 15px;
+      }
+      
+      .stat-item span {
+        font-size: 1.5rem;
+      }
+      
+      .quizz-card {
+        padding: 20px 15px;
+      }
+      
+      #currentWord {
+        font-size: 1.8rem;
+      }
+      
+      .options-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      
+      .option-btn {
+        padding: 14px 10px;
+        font-size: 1rem;
+        min-height: 55px;
+      }
+      
+      #feedback {
+        font-size: 1rem;
+        padding: 12px;
+      }
+      
+      .history-grid {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        max-height: 130px;
+      }
+      
+      .history-grid p {
+        font-size: 0.75rem;
+        padding: 8px 10px;
+      }
+    }
+
+    /* iPhone X et modèles similaires */
+    @media (max-width: 414px) and (max-height: 896px) {
+      :root {
+        --border-radius: 14px;
+      }
+      
+      header {
+        padding: 16px 12px;
+      }
+      
+      header h1 {
+        font-size: 1.25rem;
+      }
+      
+      main {
+        padding: 12px;
+      }
+      
+      .quizz-card {
+        padding: 18px 12px;
+      }
+      
+      #currentWord {
+        font-size: 1.7rem;
+      }
+      
+      .option-btn {
+        padding: 12px 8px;
+        font-size: 0.95rem;
+        min-height: 50px;
+      }
+    }
+
+    /* Très petits écrans */
+    @media (max-width: 360px) {
+      .stat-item {
+        padding: 8px 12px;
+      }
+      
+      .stat-item span {
+        font-size: 1.3rem;
+      }
+      
+      .stat-item p {
+        font-size: 0.7rem;
+      }
+      
+      #currentWord {
+        font-size: 1.6rem;
+      }
+      
+      .option-btn {
+        min-height: 48px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1><i class="fas fa-language"></i> English Vocabulary Quiz</h1>
+      <p>Medium3000 English Words</p>
+      <!-- Dark mode toggle -->
+      <div class="dark-mode-toggle">
+        <label class="switch">
+          <input type="checkbox" id="darkModeToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </header>
+    <main>
+      <!-- Section des statistiques -->
+      <div class="stats">
+        <div class="stat-item">
+          <span id="correctCount">0</span>
+          <p>Correct</p>
+        </div>
+        <div class="stat-item">
+          <span id="wrongCount">0</span>
+          <p>Incorrect</p>
+        </div>
+      </div>
+      
+      <!-- Carte de quiz -->
+      <div class="quizz-card">
+        <div class="word-display">
+          <p id="promptLabel">Translate this word:</p>
+          <p id="currentWord">...</p>
+        </div>
+        
+        <!-- Barre de progression -->
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-text">
+            <span>Question <span id="currentQuestion">0</span></span>
+            <span><span id="totalQuestions">0</span> total</span>
+          </div>
+        </div>
+        
+        <!-- Options de réponse -->
+        <div class="options-container" id="optionsContainer">
+          <!-- Les options seront générées ici -->
+        </div>
+        
+        <div id="feedback"></div>
+      </div>
+      
+      <!-- Contrôles -->
+      <div class="controls">
+        <button id="newSeriesBtn">
+          <i class="fas fa-redo"></i> New Quiz
+        </button>
+        <div class="series-info">
+          Quiz of <span id="totalWords">50</span> questions
+        </div>
+      </div>
+      
+      <!-- Historique des réponses -->
+      <div class="history-container">
+        <h2><i class="fas fa-history"></i> History</h2>
+        <div id="history" class="history-grid">
+          <!-- Les réponses validées s'afficheront ici -->
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>Total words: <span id="dbWordCount">0</span></p>
+    </footer>
+  </div>
+  <script>
+    /***************************************************
+     * 1) Base de données
+     ***************************************************/
+    const wordsDB = [
+      { en: "abandon", fr: "abandonner" },
+      { en: "ability", fr: "capacité" },
+      { en: "able", fr: "capable" },
+      { en: "about", fr: "environ" },
+      { en: "above", fr: "au-dessus" },
+      { en: "absence", fr: "absence" },
+      { en: "absolute", fr: "absolu" },
+      { en: "absolutely", fr: "absolument" },
+      { en: "absorb", fr: "absorber" },
+      { en: "abstract", fr: "abstrait" },
+      { en: "abuse", fr: "abus" },
+      { en: "academic", fr: "académique" },
+      { en: "accept", fr: "accepter" },
+      { en: "access", fr: "accès" },
+      { en: "accident", fr: "accident" },
+      { en: "accompany", fr: "accompagner" },
+      { en: "accomplish", fr: "accomplir" },
+      { en: "account", fr: "compte" },
+      { en: "accurate", fr: "précis" },
+      { en: "achieve", fr: "réaliser" },
+      { en: "achievement", fr: "réalisation" },
+      { en: "acid", fr: "acide" },
+      { en: "acknowledge", fr: "reconnaître" },
+      { en: "acquire", fr: "acquérir" },
+      { en: "across", fr: "à travers" },
+      { en: "act", fr: "agir" },
+      { en: "action", fr: "action" },
+      { en: "active", fr: "actif" },
+      { en: "activity", fr: "activité" },
+      { en: "actor", fr: "acteur" },
+      { en: "actress", fr: "actrice" },
+      { en: "actual", fr: "réel" },
+      { en: "actually", fr: "en fait" },
+      { en: "adapt", fr: "adapter" },
+      { en: "add", fr: "ajouter" },
+      { en: "addition", fr: "addition" },
+      { en: "additional", fr: "supplémentaire" },
+      { en: "address", fr: "adresse" },
+      { en: "adequate", fr: "adéquat" },
+      { en: "adjust", fr: "ajuster" },
+      { en: "administration", fr: "administration" },
+      { en: "admire", fr: "admirer" },
+      { en: "admit", fr: "admettre" },
+      { en: "adopt", fr: "adopter" },
+      { en: "adult", fr: "adulte" },
+      { en: "advance", fr: "avancer" },
+      { en: "advanced", fr: "avancé" },
+      { en: "advantage", fr: "avantage" },
+      { en: "adventure", fr: "aventure" },
+      { en: "advertise", fr: "faire de la publicité" },
+      { en: "advice", fr: "conseil" },
+      { en: "advise", fr: "conseiller" },
+      { en: "affair", fr: "affaire" },
+      { en: "affect", fr: "affecter" },
+      { en: "afford", fr: "se permettre" },
+      { en: "afraid", fr: "effrayé" },
+      { en: "after", fr: "après" },
+      { en: "afternoon", fr: "après-midi" },
+      { en: "again", fr: "encore" },
+      { en: "against", fr: "contre" },
+      { en: "age", fr: "âge" },
+      { en: "agency", fr: "agence" },
+      { en: "agent", fr: "agent" },
+      { en: "aggressive", fr: "agressif" },
+      { en: "ago", fr: "il y a" },
+      { en: "agree", fr: "être d'accord" },
+      { en: "agreement", fr: "accord" },
+      { en: "ahead", fr: "devant" },
+      { en: "aid", fr: "aide" },
+      { en: "aim", fr: "but" },
+      { en: "air", fr: "air" },
+      { en: "aircraft", fr: "avion" },
+      { en: "airport", fr: "aéroport" },
+      { en: "alarm", fr: "alarme" },
+      { en: "album", fr: "album" },
+      { en: "alcohol", fr: "alcool" },
+      { en: "alive", fr: "vivant" },
+      { en: "all", fr: "tous" },
+      { en: "allow", fr: "permettre" },
+      { en: "almost", fr: "presque" },
+      { en: "alone", fr: "seul" },
+      { en: "along", fr: "le long de" },
+      { en: "already", fr: "déjà" },
+      { en: "also", fr: "aussi" },
+      { en: "alter", fr: "modifier" },
+      { en: "alternative", fr: "alternative" },
+      { en: "although", fr: "bien que" },
+      { en: "always", fr: "toujours" },
+      { en: "amaze", fr: "étonner" },
+      { en: "amazing", fr: "incroyable" },
+      { en: "among", fr: "parmi" },
+      { en: "amount", fr: "montant" },
+      { en: "analysis", fr: "analyse" },
+      { en: "analyze", fr: "analyser" },
+      { en: "ancient", fr: "ancien" },
+      { en: "and", fr: "et" },
+      { en: "anger", fr: "colère" },
+      { en: "angle", fr: "angle" },
+      { en: "angry", fr: "en colère" },
+      { en: "animal", fr: "animal" },
+      { en: "announce", fr: "annoncer" },
+      { en: "annual", fr: "annuel" },
+      { en: "another", fr: "un autre" },
+      { en: "answer", fr: "réponse" },
+      { en: "anticipate", fr: "anticiper" },
+      { en: "anxiety", fr: "anxiété" },
+      { en: "any", fr: "n'importe quel" },
+      { en: "anybody", fr: "quelqu'un" },
+      { en: "anymore", fr: "plus" },
+      { en: "anyone", fr: "quelqu'un" },
+      { en: "anything", fr: "n'importe quoi" },
+      { en: "anyway", fr: "de toute façon" },
+      { en: "anywhere", fr: "n'importe où" },
+      { en: "apart", fr: "à part" },
+      { en: "apartment", fr: "appartement" },
+      { en: "apparent", fr: "apparent" },
+      { en: "apparently", fr: "apparemment" },
+      { en: "appeal", fr: "appel" },
+      { en: "appear", fr: "apparaître" },
+      { en: "appearance", fr: "apparence" },
+      { en: "apple", fr: "pomme" },
+      { en: "application", fr: "application" },
+      { en: "apply", fr: "appliquer" },
+      { en: "appoint", fr: "nommer" },
+      { en: "appointment", fr: "rendez-vous" },
+      { en: "appreciate", fr: "apprécier" },
+      { en: "approach", fr: "approcher" },
+      { en: "appropriate", fr: "approprié" },
+      { en: "approval", fr: "approbation" },
+      { en: "approve", fr: "approuver" },
+      { en: "approximately", fr: "environ" },
+      { en: "architect", fr: "architecte" },
+      { en: "area", fr: "zone" },
+      { en: "argue", fr: "se disputer" },
+      { en: "argument", fr: "argument" },
+      { en: "arise", fr: "surgir" },
+      { en: "arm", fr: "bras" },
+      { en: "armed", fr: "armé" },
+      { en: "army", fr: "armée" },
+      { en: "around", fr: "autour" },
+      { en: "arrange", fr: "arranger" },
+      { en: "arrangement", fr: "arrangement" },
+      { en: "arrest", fr: "arrêter" },
+      { en: "arrival", fr: "arrivée" },
+      { en: "arrive", fr: "arriver" },
+      { en: "art", fr: "art" },
+      { en: "article", fr: "article" },
+      { en: "artist", fr: "artiste" },
+      { en: "artistic", fr: "artistique" },
+      { en: "as", fr: "comme" },
+      { en: "ashamed", fr: "honteux" },
+      { en: "aside", fr: "à côté" },
+      { en: "ask", fr: "demander" },
+      { en: "asleep", fr: "endormi" },
+      { en: "aspect", fr: "aspect" },
+      { en: "assault", fr: "agression" },
+      { en: "assert", fr: "affirmer" },
+      { en: "assess", fr: "évaluer" },
+      { en: "assessment", fr: "évaluation" },
+      { en: "asset", fr: "actif" },
+      { en: "assign", fr: "assigner" },
+      { en: "assignment", fr: "devoir" },
+      { en: "assist", fr: "aider" },
+      { en: "assistance", fr: "aide" },
+      { en: "assistant", fr: "assistant" },
+      { en: "associate", fr: "associer" },
+      { en: "association", fr: "association" },
+      { en: "assume", fr: "supposer" },
+      { en: "assumption", fr: "hypothèse" },
+      { en: "assure", fr: "assurer" },
+      { en: "at", fr: "à" },
+      { en: "athlete", fr: "athlète" },
+      { en: "athletic", fr: "athlétique" },
+      { en: "atmosphere", fr: "atmosphère" },
+      { en: "attach", fr: "attacher" },
+      { en: "attack", fr: "attaque" },
+      { en: "attempt", fr: "tentative" },
+      { en: "attend", fr: "assister" },
+      { en: "attention", fr: "attention" },
+      { en: "attitude", fr: "attitude" },
+      { en: "attorney", fr: "avocat" },
+      { en: "attract", fr: "attirer" },
+      { en: "attraction", fr: "attraction" },
+      { en: "attractive", fr: "attrayant" },
+      { en: "attribute", fr: "attribut" },
+      { en: "audience", fr: "public" },
+      { en: "author", fr: "auteur" },
+      { en: "authority", fr: "autorité" },
+      { en: "auto", fr: "voiture" },
+      { en: "available", fr: "disponible" },
+      { en: "average", fr: "moyenne" },
+      { en: "avoid", fr: "éviter" },
+      { en: "award", fr: "prix" },
+      { en: "aware", fr: "conscient" },
+      { en: "awareness", fr: "conscience" },
+      { en: "away", fr: "loin" },
+      { en: "awful", fr: "terrible" },
+      { en: "baby", fr: "bébé" },
+      { en: "back", fr: "dos" },
+      { en: "background", fr: "arrière-plan" },
+      { en: "bad", fr: "mauvais" },
+      { en: "badly", fr: "mal" },
+      { en: "bag", fr: "sac" },
+      { en: "bake", fr: "cuire" },
+      { en: "balance", fr: "équilibre" },
+      { en: "ball", fr: "balle" },
+      { en: "ban", fr: "interdire" },
+      { en: "band", fr: "groupe" },
+      { en: "bank", fr: "banque" },
+      { en: "bar", fr: "bar" },
+      { en: "barely", fr: "à peine" },
+      { en: "barrel", fr: "baril" },
+      { en: "barrier", fr: "barrière" },
+      { en: "base", fr: "base" },
+      { en: "baseball", fr: "baseball" },
+      { en: "basic", fr: "basique" },
+      { en: "basically", fr: "fondamentalement" },
+      { en: "basis", fr: "base" },
+      { en: "basket", fr: "panier" },
+      { en: "basketball", fr: "basketball" },
+      { en: "bathroom", fr: "salle de bain" },
+      { en: "battery", fr: "batterie" },
+      { en: "battle", fr: "bataille" },
+      { en: "be", fr: "être" },
+      { en: "beach", fr: "plage" },
+      { en: "bean", fr: "haricot" },
+      { en: "bear", fr: "ours" },
+      { en: "beat", fr: "battre" },
+      { en: "beautiful", fr: "beau" },
+      { en: "beauty", fr: "beauté" },
+      { en: "because", fr: "parce que" },
+      { en: "become", fr: "devenir" },
+      { en: "bed", fr: "lit" },
+      { en: "bedroom", fr: "chambre" },
+      { en: "beer", fr: "bière" },
+      { en: "before", fr: "avant" },
+      { en: "begin", fr: "commencer" },
+      { en: "beginning", fr: "début" },
+      { en: "behavior", fr: "comportement" },
+      { en: "behind", fr: "derrière" },
+      { en: "being", fr: "être" },
+      { en: "belief", fr: "croyance" },
+      { en: "believe", fr: "croire" },
+      { en: "bell", fr: "cloche" },
+      { en: "belong", fr: "appartenir" },
+      { en: "below", fr: "en dessous" },
+      { en: "belt", fr: "ceinture" },
+      { en: "bench", fr: "banc" },
+      { en: "bend", fr: "plier" },
+      { en: "beneath", fr: "sous" },
+      { en: "benefit", fr: "avantage" },
+      { en: "beside", fr: "à côté de" },
+      { en: "besides", fr: "en outre" },
+      { en: "best", fr: "meilleur" },
+      { en: "bet", fr: "parier" },
+      { en: "better", fr: "mieux" },
+      { en: "between", fr: "entre" },
+      { en: "beyond", fr: "au-delà" },
+      { en: "Bible", fr: "Bible" },
+      { en: "big", fr: "grand" },
+      { en: "bike", fr: "vélo" },
+      { en: "bill", fr: "facture" },
+      { en: "billion", fr: "milliard" },
+      { en: "bind", fr: "lier" },
+      { en: "biological", fr: "biologique" },
+      { en: "bird", fr: "oiseau" },
+      { en: "birth", fr: "naissance" },
+      { en: "birthday", fr: "anniversaire" },
+      { en: "bit", fr: "peu" },
+      { en: "bite", fr: "mordre" },
+      { en: "black", fr: "noir" },
+      { en: "blade", fr: "lame" },
+      { en: "blame", fr: "blâmer" },
+      { en: "blanket", fr: "couverture" },
+      { en: "blind", fr: "aveugle" },
+      { en: "block", fr: "bloc" },
+      { en: "blood", fr: "sang" },
+      { en: "blow", fr: "souffler" },
+      { en: "blue", fr: "bleu" },
+      { en: "board", fr: "tableau" },
+      { en: "boat", fr: "bateau" },
+      { en: "body", fr: "corps" },
+      { en: "bomb", fr: "bombe" },
+      { en: "bombing", fr: "attentat" },
+      { en: "bond", fr: "lien" },
+      { en: "bone", fr: "os" },
+      { en: "book", fr: "livre" },
+      { en: "boom", fr: "boom" },
+      { en: "boot", fr: "botte" },
+      { en: "border", fr: "frontière" },
+      { en: "born", fr: "né" },
+      { en: "borrow", fr: "emprunter" },
+      { en: "boss", fr: "patron" },
+      { en: "both", fr: "tous les deux" },
+      { en: "bother", fr: "déranger" },
+      { en: "bottle", fr: "bouteille" },
+      { en: "bottom", fr: "bas" },
+      { en: "boundary", fr: "limite" },
+      { en: "bowl", fr: "bol" },
+      { en: "box", fr: "boîte" },
+      { en: "boy", fr: "garçon" },
+      { en: "boyfriend", fr: "petit ami" },
+      { en: "brain", fr: "cerveau" },
+      { en: "branch", fr: "branche" },
+      { en: "brand", fr: "marque" },
+      { en: "bread", fr: "pain" },
+      { en: "break", fr: "casser" },
+      { en: "breakfast", fr: "petit déjeuner" },
+      { en: "breast", fr: "sein" },
+      { en: "breath", fr: "souffle" },
+      { en: "breathe", fr: "respirer" },
+      { en: "brick", fr: "brique" },
+      { en: "bridge", fr: "pont" },
+      { en: "brief", fr: "bref" },
+      { en: "briefly", fr: "brièvement" },
+      { en: "bright", fr: "brillant" },
+      { en: "brilliant", fr: "brillant" },
+      { en: "bring", fr: "apporter" },
+      { en: "British", fr: "britannique" },
+      { en: "broad", fr: "large" },
+      { en: "broken", fr: "cassé" },
+      { en: "brother", fr: "frère" },
+      { en: "brown", fr: "marron" },
+      { en: "brush", fr: "brosse" },
+      { en: "buck", fr: "buck" },
+      { en: "budget", fr: "budget" },
+      { en: "build", fr: "construire" },
+      { en: "building", fr: "bâtiment" },
+      { en: "bullet", fr: "balle" },
+      { en: "bunch", fr: "groupe" },
+      { en: "burden", fr: "fardeau" },
+      { en: "burn", fr: "brûler" },
+      { en: "bury", fr: "enterrer" },
+      { en: "bus", fr: "bus" },
+      { en: "business", fr: "entreprise" },
+      { en: "busy", fr: "occupé" },
+      { en: "but", fr: "mais" },
+      { en: "butter", fr: "beurre" },
+      { en: "button", fr: "bouton" },
+      { en: "buy", fr: "acheter" },
+      { en: "buyer", fr: "acheteur" },
+      { en: "by", fr: "par" },
+      { en: "cabin", fr: "cabane" },
+      { en: "cabinet", fr: "armoire" },
+      { en: "cable", fr: "câble" },
+      { en: "cake", fr: "gâteau" },
+      { en: "calculate", fr: "calculer" },
+      { en: "call", fr: "appeler" },
+      { en: "camera", fr: "appareil photo" },
+      { en: "camp", fr: "camp" },
+      { en: "campaign", fr: "campagne" },
+      { en: "campus", fr: "campus" },
+      { en: "can", fr: "pouvoir" },
+      { en: "Canadian", fr: "canadien" },
+      { en: "cancer", fr: "cancer" },
+      { en: "candidate", fr: "candidat" },
+      { en: "cap", fr: "casquette" },
+      { en: "capability", fr: "capacité" },
+      { en: "capable", fr: "capable" },
+      { en: "capacity", fr: "capacité" },
+      { en: "capital", fr: "capital" },
+      { en: "captain", fr: "capitaine" },
+      { en: "capture", fr: "capturer" },
+      { en: "car", fr: "voiture" },
+      { en: "carbon", fr: "carbone" },
+      { en: "card", fr: "carte" },
+      { en: "care", fr: "soin" },
+      { en: "career", fr: "carrière" },
+      { en: "careful", fr: "prudent" },
+      { en: "carefully", fr: "prudemment" },
+      { en: "carrier", fr: "transporteur" },
+      { en: "carry", fr: "porter" },
+      { en: "case", fr: "cas" },
+      { en: "cash", fr: "argent" },
+      { en: "cast", fr: "jeter" },
+      { en: "cat", fr: "chat" },
+      { en: "catch", fr: "attraper" },
+      { en: "category", fr: "catégorie" },
+      { en: "Catholic", fr: "catholique" },
+      { en: "cause", fr: "cause" },
+      { en: "ceiling", fr: "plafond" },
+      { en: "celebrate", fr: "célébrer" },
+      { en: "celebration", fr: "célébration" },
+      { en: "celebrity", fr: "célébrité" },
+      { en: "cell", fr: "cellule" },
+      { en: "center", fr: "centre" },
+      { en: "central", fr: "central" },
+      { en: "century", fr: "siècle" },
+      { en: "CEO", fr: "PDG" },
+      { en: "ceremony", fr: "cérémonie" },
+      { en: "certain", fr: "certain" },
+      { en: "certainly", fr: "certainement" },
+      { en: "chain", fr: "chaîne" },
+      { en: "chair", fr: "chaise" },
+      { en: "chairman", fr: "président" },
+      { en: "challenge", fr: "défi" },
+      { en: "chamber", fr: "chambre" },
+      { en: "champion", fr: "champion" },
+      { en: "championship", fr: "championnat" },
+      { en: "chance", fr: "chance" },
+      { en: "change", fr: "changer" },
+      { en: "changing", fr: "changeant" },
+      { en: "channel", fr: "chaîne" },
+      { en: "chapter", fr: "chapitre" },
+      { en: "character", fr: "personnage" },
+      { en: "characteristic", fr: "caractéristique" },
+      { en: "characterize", fr: "caractériser" },
+      { en: "charge", fr: "charger" },
+      { en: "charity", fr: "charité" },
+      { en: "chart", fr: "graphique" },
+      { en: "chase", fr: "poursuivre" },
+      { en: "cheap", fr: "pas cher" },
+      { en: "check", fr: "vérifier" },
+      { en: "cheek", fr: "joue" },
+      { en: "cheese", fr: "fromage" },
+      { en: "chef", fr: "chef" },
+      { en: "chemical", fr: "chimique" },
+      { en: "chest", fr: "poitrine" },
+      { en: "chicken", fr: "poulet" },
+      { en: "chief", fr: "chef" },
+      { en: "child", fr: "enfant" },
+      { en: "childhood", fr: "enfance" },
+      { en: "Chinese", fr: "chinois" },
+      { en: "chip", fr: "puce" },
+      { en: "chocolate", fr: "chocolat" },
+      { en: "choice", fr: "choix" },
+      { en: "cholesterol", fr: "cholestérol" },
+      { en: "choose", fr: "choisir" },
+      { en: "Christian", fr: "chrétien" },
+      { en: "Christmas", fr: "Noël" },
+      { en: "church", fr: "église" },
+      { en: "cigarette", fr: "cigarette" },
+      { en: "circle", fr: "cercle" },
+      { en: "circumstance", fr: "circonstance" },
+      { en: "cite", fr: "citer" },
+      { en: "citizen", fr: "citoyen" },
+      { en: "city", fr: "ville" },
+      { en: "civil", fr: "civil" },
+      { en: "civilian", fr: "civil" },
+      { en: "claim", fr: "revendication" },
+      { en: "class", fr: "classe" },
+      { en: "classic", fr: "classique" },
+      { en: "classroom", fr: "salle de classe" },
+      { en: "clean", fr: "propre" },
+      { en: "clear", fr: "clair" },
+      { en: "clearly", fr: "clairement" },
+      { en: "client", fr: "client" },
+      { en: "climate", fr: "climat" },
+      { en: "climb", fr: "grimper" },
+      { en: "clinic", fr: "clinique" },
+      { en: "clinical", fr: "clinique" },
+      { en: "clock", fr: "horloge" },
+      { en: "close", fr: "fermer" },
+      { en: "closely", fr: "étroitement" },
+      { en: "closer", fr: "plus proche" },
+      { en: "clothes", fr: "vêtements" },
+      { en: "clothing", fr: "vêtements" },
+      { en: "cloud", fr: "nuage" },
+      { en: "club", fr: "club" },
+      { en: "clue", fr: "indice" },
+      { en: "cluster", fr: "grappe" },
+      { en: "coach", fr: "entraîneur" },
+      { en: "coal", fr: "charbon" },
+      { en: "coalition", fr: "coalition" },
+      { en: "coast", fr: "côte" },
+      { en: "coat", fr: "manteau" },
+      { en: "code", fr: "code" },
+      { en: "coffee", fr: "café" },
+      { en: "cognitive", fr: "cognitif" },
+      { en: "cold", fr: "froid" },
+      { en: "collapse", fr: "effondrement" },
+      { en: "colleague", fr: "collègue" },
+      { en: "collect", fr: "collecter" },
+      { en: "collection", fr: "collection" },
+      { en: "collective", fr: "collectif" },
+      { en: "college", fr: "université" },
+      { en: "colonial", fr: "colonial" },
+      { en: "color", fr: "couleur" },
+      { en: "column", fr: "colonne" },
+      { en: "combination", fr: "combinaison" },
+      { en: "combine", fr: "combiner" },
+      { en: "come", fr: "venir" },
+      { en: "comedy", fr: "comédie" },
+      { en: "comfort", fr: "confort" },
+      { en: "comfortable", fr: "confortable" },
+      { en: "command", fr: "commander" },
+      { en: "commander", fr: "commandant" },
+      { en: "comment", fr: "commentaire" },
+      { en: "commercial", fr: "commercial" },
+      { en: "commission", fr: "commission" },
+      { en: "commit", fr: "s'engager" },
+      { en: "commitment", fr: "engagement" },
+      { en: "committee", fr: "comité" },
+      { en: "common", fr: "commun" },
+      { en: "communicate", fr: "communiquer" },
+      { en: "communication", fr: "communication" },
+      { en: "community", fr: "communauté" },
+      { en: "company", fr: "entreprise" },
+      { en: "compare", fr: "comparer" },
+      { en: "comparison", fr: "comparaison" },
+      { en: "compete", fr: "compéter" },
+      { en: "competition", fr: "compétition" },
+      { en: "competitive", fr: "compétitif" },
+      { en: "competitor", fr: "concurrent" },
+      { en: "complain", fr: "se plaindre" },
+      { en: "complaint", fr: "plainte" },
+      { en: "complete", fr: "complet" },
+      { en: "completely", fr: "complètement" },
+      { en: "complex", fr: "complexe" },
+      { en: "complicated", fr: "compliqué" },
+      { en: "component", fr: "composant" },
+      { en: "compose", fr: "composer" },
+      { en: "composition", fr: "composition" },
+      { en: "comprehensive", fr: "complet" },
+      { en: "computer", fr: "ordinateur" },
+      { en: "concentrate", fr: "se concentrer" },
+      { en: "concentration", fr: "concentration" },
+      { en: "concept", fr: "concept" },
+      { en: "concern", fr: "inquiétude" },
+      { en: "concerned", fr: "inquiet" },
+      { en: "concert", fr: "concert" },
+      { en: "conclude", fr: "conclure" },
+      { en: "conclusion", fr: "conclusion" },
+      { en: "concrete", fr: "concret" },
+      { en: "condition", fr: "condition" },
+      { en: "conduct", fr: "conduire" },
+      { en: "conference", fr: "conférence" },
+      { en: "confidence", fr: "confiance" },
+      { en: "confident", fr: "confiant" },
+      { en: "confirm", fr: "confirmer" },
+      { en: "conflict", fr: "conflit" },
+      { en: "confront", fr: "confronter" },
+      { en: "confusion", fr: "confusion" },
+      { en: "Congress", fr: "Congrès" },
+      { en: "congressional", fr: "congressional" },
+      { en: "connect", fr: "connecter" },
+      { en: "connection", fr: "connexion" },
+      { en: "consciousness", fr: "conscience" },
+      { en: "consensus", fr: "consensus" },
+      { en: "consequence", fr: "conséquence" },
+      { en: "conservative", fr: "conservateur" },
+      { en: "consider", fr: "considérer" },
+      { en: "considerable", fr: "considérable" },
+      { en: "consideration", fr: "considération" },
+      { en: "consist", fr: "consister" },
+      { en: "consistent", fr: "cohérent" },
+      { en: "constant", fr: "constant" },
+      { en: "constantly", fr: "constamment" },
+      { en: "constitute", fr: "constituer" },
+      { en: "constitutional", fr: "constitutionnel" },
+      { en: "construct", fr: "construire" },
+      { en: "construction", fr: "construction" },
+      { en: "consultant", fr: "conseiller" },
+      { en: "consume", fr: "consommer" },
+      { en: "consumer", fr: "consommateur" },
+      { en: "consumption", fr: "consommation" },
+      { en: "contact", fr: "contact" },
+      { en: "contain", fr: "contenir" },
+      { en: "container", fr: "conteneur" },
+      { en: "contemporary", fr: "contemporain" },
+      { en: "content", fr: "contenu" },
+      { en: "contest", fr: "concours" },
+      { en: "context", fr: "contexte" },
+      { en: "continue", fr: "continuer" },
+      { en: "continued", fr: "continué" },
+      { en: "contract", fr: "contrat" },
+      { en: "contrast", fr: "contraste" },
+      { en: "contribute", fr: "contribuer" },
+      { en: "contribution", fr: "contribution" },
+      { en: "control", fr: "contrôle" },
+      { en: "controversial", fr: "controversé" },
+      { en: "controversy", fr: "controverse" },
+      { en: "convention", fr: "convention" },
+      { en: "conventional", fr: "conventionnel" },
+      { en: "conversation", fr: "conversation" },
+      { en: "convert", fr: "convertir" },
+      { en: "conviction", fr: "condamnation" },
+      { en: "convince", fr: "convaincre" },
+      { en: "cook", fr: "cuisiner" },
+      { en: "cookie", fr: "biscuit" },
+      { en: "cooking", fr: "cuisine" },
+      { en: "cool", fr: "froid" },
+      { en: "cooperation", fr: "coopération" },
+      { en: "cop", fr: "flic" },
+      { en: "cope", fr: "faire face" },
+      { en: "copy", fr: "copie" },
+      { en: "core", fr: "noyau" },
+      { en: "corn", fr: "maïs" },
+      { en: "corner", fr: "coin" },
+      { en: "corporate", fr: "corporate" },
+      { en: "corporation", fr: "corporation" },
+      { en: "correct", fr: "correct" },
+      { en: "correspondent", fr: "correspondant" },
+      { en: "cost", fr: "coût" },
+      { en: "cotton", fr: "coton" },
+      { en: "couch", fr: "canapé" },
+      { en: "could", fr: "pourrait" },
+      { en: "council", fr: "conseil" },
+      { en: "counselor", fr: "conseiller" },
+      { en: "count", fr: "compter" },
+      { en: "counter", fr: "comptoir" },
+      { en: "country", fr: "pays" },
+      { en: "county", fr: "comté" },
+      { en: "couple", fr: "couple" },
+      { en: "courage", fr: "courage" },
+      { en: "course", fr: "cours" },
+      { en: "court", fr: "tribunal" },
+      { en: "cousin", fr: "cousin" },
+      { en: "cover", fr: "couvrir" },
+      { en: "coverage", fr: "couverture" },
+      { en: "cow", fr: "vache" },
+      { en: "crack", fr: "fissure" },
+      { en: "craft", fr: "métier" },
+      { en: "crash", fr: "écraser" },
+      { en: "crazy", fr: "fou" },
+      { en: "cream", fr: "crème" },
+      { en: "create", fr: "créer" },
+      { en: "creation", fr: "création" },
+      { en: "creative", fr: "créatif" },
+      { en: "creature", fr: "créature" },
+      { en: "credit", fr: "crédit" },
+      { en: "crew", fr: "équipage" },
+      { en: "crime", fr: "crime" },
+      { en: "criminal", fr: "criminel" },
+      { en: "crisis", fr: "crise" },
+      { en: "criteria", fr: "critères" },
+      { en: "critic", fr: "critique" },
+      { en: "critical", fr: "critique" },
+      { en: "criticism", fr: "critique" },
+      { en: "criticize", fr: "critiquer" },
+      { en: "crop", fr: "récolte" },
+      { en: "cross", fr: "croix" },
+      { en: "crowd", fr: "foule" },
+      { en: "crucial", fr: "crucial" },
+      { en: "cry", fr: "pleurer" },
+      { en: "cultural", fr: "culturel" },
+      { en: "culture", fr: "culture" },
+      { en: "cup", fr: "tasse" },
+      { en: "curious", fr: "curieux" },
+      { en: "current", fr: "actuel" },
+      { en: "currently", fr: "actuellement" },
+      { en: "curriculum", fr: "programme" },
+      { en: "custom", fr: "coutume" },
+      { en: "customer", fr: "client" },
+      { en: "cut", fr: "couper" },
+      { en: "cycle", fr: "cycle" },
+      { en: "dad", fr: "papa" },
+      { en: "daily", fr: "quotidien" },
+      { en: "damage", fr: "dommage" },
+      { en: "dance", fr: "danser" },
+      { en: "danger", fr: "danger" },
+      { en: "dangerous", fr: "dangereux" },
+      { en: "dare", fr: "oser" },
+      { en: "dark", fr: "sombre" },
+      { en: "darkness", fr: "obscurité" },
+      { en: "data", fr: "données" },
+      { en: "date", fr: "date" },
+      { en: "daughter", fr: "fille" },
+      { en: "day", fr: "jour" },
+      { en: "dead", fr: "mort" },
+      { en: "deal", fr: "accord" },
+      { en: "dealer", fr: "revendeur" },
+      { en: "dear", fr: "cher" },
+      { en: "death", fr: "mort" },
+      { en: "debate", fr: "débat" },
+      { en: "debt", fr: "dette" },
+      { en: "decade", fr: "décennie" },
+      { en: "decide", fr: "décider" },
+      { en: "decision", fr: "décision" },
+      { en: "deck", fr: "pont" },
+      { en: "declare", fr: "déclarer" },
+      { en: "decline", fr: "refuser" },
+      { en: "decrease", fr: "diminuer" },
+      { en: "deep", fr: "profond" },
+      { en: "deeply", fr: "profondément" },
+      { en: "deer", fr: "cerf" },
+      { en: "defeat", fr: "défaite" },
+      { en: "defend", fr: "défendre" },
+      { en: "defendant", fr: "défendeur" },
+      { en: "defense", fr: "défense" },
+      { en: "defensive", fr: "défensif" },
+      { en: "deficit", fr: "déficit" },
+      { en: "define", fr: "définir" },
+      { en: "definitely", fr: "définitivement" },
+      { en: "definition", fr: "définition" },
+      { en: "degree", fr: "degré" },
+      { en: "delay", fr: "retard" },
+      { en: "deliver", fr: "livrer" },
+      { en: "delivery", fr: "livraison" },
+      { en: "demand", fr: "demande" },
+      { en: "democracy", fr: "démocratie" },
+      { en: "Democrat", fr: "démocrate" },
+      { en: "democratic", fr: "démocratique" },
+      { en: "demonstrate", fr: "démontrer" },
+      { en: "demonstration", fr: "manifestation" },
+      { en: "deny", fr: "nier" },
+      { en: "department", fr: "département" },
+      { en: "depend", fr: "dépendre" },
+      { en: "dependent", fr: "dépendant" },
+      { en: "depending", fr: "selon" },
+      { en: "depict", fr: "dépeindre" },
+      { en: "depression", fr: "dépression" },
+      { en: "depth", fr: "profondeur" },
+      { en: "deputy", fr: "adjoint" },
+      { en: "derive", fr: "dériver" },
+      { en: "describe", fr: "décrire" },
+      { en: "description", fr: "description" },
+      { en: "desert", fr: "désert" },
+      { en: "deserve", fr: "mériter" },
+      { en: "design", fr: "design" },
+      { en: "designer", fr: "designer" },
+      { en: "desire", fr: "désir" },
+      { en: "desk", fr: "bureau" },
+      { en: "desperate", fr: "désespéré" },
+      { en: "despite", fr: "malgré" },
+      { en: "destroy", fr: "détruire" },
+      { en: "destruction", fr: "destruction" },
+      { en: "detail", fr: "détail" },
+      { en: "detailed", fr: "détaillé" },
+      { en: "detect", fr: "détecter" },
+      { en: "determine", fr: "déterminer" },
+      { en: "develop", fr: "développer" },
+      { en: "developing", fr: "en développement" },
+      { en: "development", fr: "développement" },
+      { en: "device", fr: "appareil" },
+      { en: "devote", fr: "consacrer" },
+      { en: "dialogue", fr: "dialogue" },
+      { en: "die", fr: "mourir" },
+      { en: "diet", fr: "régime" },
+      { en: "differ", fr: "différer" },
+      { en: "difference", fr: "différence" },
+      { en: "different", fr: "différent" },
+      { en: "differently", fr: "différemment" },
+      { en: "difficult", fr: "difficile" },
+      { en: "difficulty", fr: "difficulté" },
+      { en: "dig", fr: "creuser" },
+      { en: "digital", fr: "numérique" },
+      { en: "dimension", fr: "dimension" },
+      { en: "dining", fr: "à manger" },
+      { en: "dinner", fr: "dîner" },
+      { en: "direct", fr: "direct" },
+      { en: "direction", fr: "direction" },
+      { en: "directly", fr: "directement" },
+      { en: "director", fr: "directeur" },
+      { en: "dirt", fr: "saleté" },
+      { en: "dirty", fr: "sale" },
+      { en: "disability", fr: "handicap" },
+      { en: "disagree", fr: "être en désaccord" },
+      { en: "disappear", fr: "disparaître" },
+      { en: "disaster", fr: "désastre" },
+      { en: "discipline", fr: "discipline" },
+      { en: "discourse", fr: "discours" },
+      { en: "discover", fr: "découvrir" },
+      { en: "discovery", fr: "découverte" },
+      { en: "discrimination", fr: "discrimination" },
+      { en: "discuss", fr: "discuter" },
+      { en: "discussion", fr: "discussion" },
+      { en: "disease", fr: "maladie" },
+      { en: "dish", fr: "plat" },
+      { en: "dismiss", fr: "renvoyer" },
+      { en: "disorder", fr: "trouble" },
+      { en: "display", fr: "afficher" },
+      { en: "dispute", fr: "dispute" },
+      { en: "distance", fr: "distance" },
+      { en: "distant", fr: "lointain" },
+      { en: "distinct", fr: "distinct" },
+      { en: "distinction", fr: "distinction" },
+      { en: "distinguish", fr: "distinguer" },
+      { en: "distribute", fr: "distribuer" },
+      { en: "distribution", fr: "distribution" },
+      { en: "district", fr: "quartier" },
+      { en: "diverse", fr: "divers" },
+      { en: "diversity", fr: "diversité" },
+      { en: "divide", fr: "diviser" },
+      { en: "division", fr: "division" },
+      { en: "divorce", fr: "divorce" },
+      { en: "DNA", fr: "ADN" },
+      { en: "do", fr: "faire" },
+      { en: "doctor", fr: "docteur" },
+      { en: "document", fr: "document" },
+      { en: "dog", fr: "chien" },
+      { en: "domestic", fr: "domestique" },
+      { en: "dominant", fr: "dominant" },
+      { en: "dominate", fr: "dominer" },
+      { en: "door", fr: "porte" },
+      { en: "double", fr: "double" },
+      { en: "doubt", fr: "doute" },
+      { en: "down", fr: "bas" },
+      { en: "downtown", fr: "centre-ville" },
+      { en: "dozen", fr: "douzaine" },
+      { en: "draft", fr: "ébauche" },
+      { en: "drag", fr: "traîner" },
+      { en: "drama", fr: "drame" },
+      { en: "dramatic", fr: "dramatique" },
+      { en: "dramatically", fr: "dramatiquement" },
+      { en: "draw", fr: "dessiner" },
+      { en: "drawing", fr: "dessin" },
+      { en: "dream", fr: "rêve" },
+      { en: "dress", fr: "robe" },
+      { en: "drink", fr: "boire" },
+      { en: "drive", fr: "conduire" },
+      { en: "driver", fr: "conducteur" },
+      { en: "drop", fr: "tomber" },
+      { en: "drug", fr: "drogue" },
+      { en: "dry", fr: "sec" },
+      { en: "due", fr: "dû" },
+      { en: "during", fr: "pendant" },
+      { en: "dust", fr: "poussière" },
+      { en: "duty", fr: "devoir" },
+      { en: "each", fr: "chaque" },
+      { en: "eager", fr: "impatient" },
+      { en: "ear", fr: "oreille" },
+      { en: "early", fr: "tôt" },
+      { en: "earn", fr: "gagner" },
+      { en: "earnings", fr: "gains" },
+      { en: "earth", fr: "terre" },
+      { en: "ease", fr: "facilité" },
+      { en: "easily", fr: "facilement" },
+      { en: "east", fr: "est" },
+      { en: "eastern", fr: "oriental" },
+      { en: "easy", fr: "facile" },
+      { en: "eat", fr: "manger" },
+      { en: "economic", fr: "économique" },
+      { en: "economics", fr: "économie" },
+      { en: "economist", fr: "économiste" },
+      { en: "economy", fr: "économie" },
+      { en: "edge", fr: "bord" },
+      { en: "edition", fr: "édition" },
+      { en: "editor", fr: "éditeur" },
+      { en: "educate", fr: "éduquer" },
+      { en: "education", fr: "éducation" },
+      { en: "educational", fr: "éducatif" },
+      { en: "educator", fr: "éducateur" },
+      { en: "effect", fr: "effet" },
+      { en: "effective", fr: "efficace" },
+      { en: "effectively", fr: "efficacement" },
+      { en: "efficiency", fr: "efficacité" },
+      { en: "efficient", fr: "efficace" },
+      { en: "effort", fr: "effort" },
+      { en: "egg", fr: "œuf" },
+      { en: "eight", fr: "huit" },
+      { en: "either", fr: "soit" },
+      { en: "elderly", fr: "âgé" },
+      { en: "elect", fr: "élire" },
+      { en: "election", fr: "élection" },
+      { en: "electric", fr: "électrique" },
+      { en: "electricity", fr: "électricité" },
+      { en: "electronic", fr: "électronique" },
+      { en: "element", fr: "élément" },
+      { en: "elementary", fr: "élémentaire" },
+      { en: "eliminate", fr: "éliminer" },
+      { en: "elite", fr: "élite" },
+      { en: "else", fr: "autre" },
+      { en: "elsewhere", fr: "ailleurs" },
+      { en: "e-mail", fr: "e-mail" },
+      { en: "embrace", fr: "embrasser" },
+      { en: "emerge", fr: "émerger" },
+      { en: "emergency", fr: "urgence" },
+      { en: "emission", fr: "émission" },
+      { en: "emotion", fr: "émotion" },
+      { en: "emotional", fr: "émotionnel" },
+      { en: "emphasis", fr: "accent" },
+      { en: "emphasize", fr: "souligner" },
+      { en: "employ", fr: "employer" },
+      { en: "employee", fr: "employé" },
+      { en: "employer", fr: "employeur" },
+      { en: "employment", fr: "emploi" },
+      { en: "empty", fr: "vide" },
+      { en: "enable", fr: "permettre" },
+      { en: "encounter", fr: "rencontrer" },
+      { en: "encourage", fr: "encourager" },
+      { en: "end", fr: "fin" },
+      { en: "enemy", fr: "ennemi" },
+      { en: "energy", fr: "énergie" },
+      { en: "enforcement", fr: "application" },
+      { en: "engage", fr: "s'engager" },
+      { en: "engine", fr: "moteur" },
+      { en: "engineer", fr: "ingénieur" },
+      { en: "engineering", fr: "ingénierie" },
+      { en: "English", fr: "anglais" },
+      { en: "enhance", fr: "améliorer" },
+      { en: "enjoy", fr: "apprécier" },
+      { en: "enormous", fr: "énorme" },
+      { en: "enough", fr: "assez" },
+      { en: "ensure", fr: "assurer" },
+      { en: "enter", fr: "entrer" },
+      { en: "enterprise", fr: "entreprise" },
+      { en: "entertainment", fr: "divertissement" },
+      { en: "entire", fr: "entier" },
+      { en: "entirely", fr: "entièrement" },
+      { en: "entrance", fr: "entrée" },
+      { en: "entry", fr: "entrée" },
+      { en: "environment", fr: "environnement" },
+      { en: "environmental", fr: "environnemental" },
+      { en: "episode", fr: "épisode" },
+      { en: "equal", fr: "égal" },
+      { en: "equally", fr: "également" },
+      { en: "equipment", fr: "équipement" },
+      { en: "era", fr: "ère" },
+      { en: "error", fr: "erreur" },
+      { en: "escape", fr: "s'échapper" },
+      { en: "especially", fr: "spécialement" },
+      { en: "essay", fr: "essai" },
+      { en: "essential", fr: "essentiel" },
+      { en: "essentially", fr: "essentiellement" },
+      { en: "establish", fr: "établir" },
+      { en: "establishment", fr: "établissement" },
+      { en: "estate", fr: "domaine" },
+      { en: "estimate", fr: "estimer" },
+      { en: "etc", fr: "etc" },
+      { en: "ethics", fr: "éthique" },
+      { en: "ethnic", fr: "ethnique" },
+      { en: "European", fr: "européen" },
+      { en: "evaluate", fr: "évaluer" },
+      { en: "evaluation", fr: "évaluation" },
+      { en: "even", fr: "même" },
+      { en: "evening", fr: "soir" },
+      { en: "event", fr: "événement" },
+      { en: "eventually", fr: "finalement" },
+      { en: "ever", fr: "jamais" },
+      { en: "every", fr: "chaque" },
+      { en: "everybody", fr: "tout le monde" },
+      { en: "everyday", fr: "quotidien" },
+      { en: "everyone", fr: "tout le monde" },
+      { en: "everything", fr: "tout" },
+      { en: "everywhere", fr: "partout" },
+      { en: "evidence", fr: "preuve" },
+      { en: "evolution", fr: "évolution" },
+      { en: "evolve", fr: "évoluer" },
+      { en: "exact", fr: "exact" },
+      { en: "exactly", fr: "exactement" },
+      { en: "examination", fr: "examen" },
+      { en: "examine", fr: "examiner" },
+      { en: "example", fr: "exemple" },
+      { en: "exceed", fr: "dépasser" },
+      { en: "excellent", fr: "excellent" },
+      { en: "except", fr: "sauf" },
+      { en: "exception", fr: "exception" },
+      { en: "exchange", fr: "échange" },
+      { en: "exciting", fr: "excitant" },
+      { en: "executive", fr: "exécutif" },
+      { en: "exercise", fr: "exercice" },
+      { en: "exhibit", fr: "exposer" },
+      { en: "exhibition", fr: "exposition" },
+      { en: "exist", fr: "exister" },
+      { en: "existence", fr: "existence" },
+      { en: "existing", fr: "existant" },
+      { en: "expand", fr: "élargir" },
+      { en: "expansion", fr: "expansion" },
+      { en: "expect", fr: "s'attendre" },
+      { en: "expectation", fr: "attente" },
+      { en: "expense", fr: "dépense" },
+      { en: "expensive", fr: "cher" },
+      { en: "experience", fr: "expérience" },
+      { en: "experiment", fr: "expérience" },
+      { en: "expert", fr: "expert" },
+      { en: "explain", fr: "expliquer" },
+      { en: "explanation", fr: "explication" },
+      { en: "explode", fr: "exploser" },
+      { en: "explore", fr: "explorer" },
+      { en: "explosion", fr: "explosion" },
+      { en: "expose", fr: "exposer" },
+      { en: "exposure", fr: "exposition" },
+      { en: "express", fr: "exprimer" },
+      { en: "expression", fr: "expression" },
+      { en: "extend", fr: "étendre" },
+      { en: "extension", fr: "extension" },
+      { en: "extensive", fr: "étendu" },
+      { en: "extent", fr: "étendue" },
+      { en: "external", fr: "externe" },
+      { en: "extra", fr: "supplémentaire" },
+      { en: "extraordinary", fr: "extraordinaire" },
+      { en: "extreme", fr: "extrême" },
+      { en: "extremely", fr: "extrêmement" },
+      { en: "eye", fr: "œil" },
+      { en: "fabric", fr: "tissu" },
+      { en: "face", fr: "visage" },
+      { en: "facility", fr: "installation" },
+      { en: "fact", fr: "fait" },
+      { en: "factor", fr: "facteur" },
+      { en: "factory", fr: "usine" },
+      { en: "faculty", fr: "faculté" },
+      { en: "fade", fr: "s'estomper" },
+      { en: "fail", fr: "échouer" },
+      { en: "failure", fr: "échec" },
+      { en: "fair", fr: "juste" },
+      { en: "fairly", fr: "assez" },
+      { en: "faith", fr: "foi" },
+      { en: "fall", fr: "tomber" },
+      { en: "false", fr: "faux" },
+      { en: "familiar", fr: "familier" },
+      { en: "family", fr: "famille" },
+      { en: "famous", fr: "célèbre" },
+      { en: "fan", fr: "ventilateur" },
+      { en: "fantasy", fr: "fantaisie" },
+      { en: "far", fr: "loin" },
+      { en: "farm", fr: "ferme" },
+      { en: "farmer", fr: "agriculteur" },
+      { en: "fashion", fr: "mode" },
+      { en: "fast", fr: "rapide" },
+      { en: "fat", fr: "gras" },
+      { en: "fate", fr: "destin" },
+      { en: "father", fr: "père" },
+      { en: "fault", fr: "faute" },
+      { en: "favor", fr: "faveur" },
+      { en: "favorite", fr: "préféré" },
+      { en: "fear", fr: "peur" },
+      { en: "feature", fr: "caractéristique" },
+      { en: "federal", fr: "fédéral" },
+      { en: "fee", fr: "frais" },
+      { en: "feed", fr: "nourrir" },
+      { en: "feel", fr: "sentir" },
+      { en: "feeling", fr: "sentiment" },
+      { en: "fellow", fr: "collègue" },
+      { en: "female", fr: "femme" },
+      { en: "fence", fr: "clôture" },
+      { en: "few", fr: "peu" },
+      { en: "fewer", fr: "moins" },
+      { en: "fiber", fr: "fibre" },
+      { en: "fiction", fr: "fiction" },
+      { en: "field", fr: "champ" },
+      { en: "fifteen", fr: "quinze" },
+      { en: "fifth", fr: "cinquième" },
+      { en: "fifty", fr: "cinquante" },
+      { en: "fight", fr: "se battre" },
+      { en: "fighter", fr: "combattant" },
+      { en: "fighting", fr: "combat" },
+      { en: "figure", fr: "chiffre" },
+      { en: "file", fr: "fichier" },
+      { en: "fill", fr: "remplir" },
+      { en: "film", fr: "film" },
+      { en: "final", fr: "final" },
+      { en: "finally", fr: "finalement" },
+      { en: "finance", fr: "finance" },
+      { en: "financial", fr: "financier" },
+      { en: "find", fr: "trouver" },
+      { en: "finding", fr: "découverte" },
+      { en: "fine", fr: "amende" },
+      { en: "finger", fr: "doigt" },
+      { en: "finish", fr: "finir" },
+      { en: "fire", fr: "feu" },
+      { en: "firm", fr: "entreprise" },
+      { en: "first", fr: "premier" },
+      { en: "fish", fr: "poisson" },
+      { en: "fishing", fr: "pêche" },
+      { en: "fit", fr: "en forme" },
+      { en: "fitness", fr: "forme" },
+      { en: "five", fr: "cinq" },
+      { en: "fix", fr: "réparer" },
+      { en: "flag", fr: "drapeau" },
+      { en: "flame", fr: "flamme" },
+      { en: "flat", fr: "plat" },
+      { en: "flavor", fr: "saveur" },
+      { en: "flee", fr: "s'enfuir" },
+      { en: "flesh", fr: "chair" },
+      { en: "flight", fr: "vol" },
+      { en: "float", fr: "flotter" },
+      { en: "floor", fr: "sol" },
+      { en: "flow", fr: "écouler" },
+      { en: "flower", fr: "fleur" },
+      { en: "fly", fr: "voler" },
+      { en: "focus", fr: "se concentrer" },
+      { en: "folk", fr: "peuple" },
+      { en: "follow", fr: "suivre" },
+      { en: "following", fr: "suivant" },
+      { en: "food", fr: "nourriture" },
+      { en: "foot", fr: "pied" },
+      { en: "football", fr: "football" },
+      { en: "for", fr: "pour" },
+      { en: "force", fr: "force" },
+      { en: "foreign", fr: "étranger" },
+      { en: "forest", fr: "forêt" },
+      { en: "forever", fr: "pour toujours" },
+      { en: "forget", fr: "oublier" },
+      { en: "form", fr: "forme" },
+      { en: "formal", fr: "formel" },
+      { en: "formation", fr: "formation" },
+      { en: "former", fr: "ancien" },
+      { en: "formula", fr: "formule" },
+      { en: "forth", fr: "en avant" },
+      { en: "fortune", fr: "fortune" },
+      { en: "forward", fr: "en avant" },
+      { en: "found", fr: "trouvé" },
+      { en: "foundation", fr: "fondation" },
+      { en: "founder", fr: "fondateur" },
+      { en: "four", fr: "quatre" },
+      { en: "fourth", fr: "quatrième" },
+      { en: "frame", fr: "cadre" },
+      { en: "framework", fr: "cadre" },
+      { en: "free", fr: "libre" },
+      { en: "freedom", fr: "liberté" },
+      { en: "freeze", fr: "geler" },
+      { en: "French", fr: "français" },
+      { en: "frequency", fr: "fréquence" },
+      { en: "frequent", fr: "fréquent" },
+      { en: "frequently", fr: "fréquemment" },
+      { en: "fresh", fr: "frais" },
+      { en: "friend", fr: "ami" },
+      { en: "friendly", fr: "amical" },
+      { en: "friendship", fr: "amitié" },
+      { en: "from", fr: "de" },
+      { en: "front", fr: "devant" },
+      { en: "fruit", fr: "fruit" },
+      { en: "frustration", fr: "frustration" },
+      { en: "fuel", fr: "carburant" },
+      { en: "full", fr: "plein" },
+      { en: "fully", fr: "pleinement" },
+      { en: "fun", fr: "amusement" },
+      { en: "function", fr: "fonction" },
+      { en: "fund", fr: "fonds" },
+      { en: "fundamental", fr: "fondamental" },
+      { en: "funding", fr: "financement" },
+      { en: "funeral", fr: "funérailles" },
+      { en: "funny", fr: "drôle" },
+      { en: "furniture", fr: "meubles" },
+      { en: "furthermore", fr: "de plus" },
+      { en: "future", fr: "avenir" },
+      { en: "gain", fr: "gagner" },
+      { en: "galaxy", fr: "galaxie" },
+      { en: "gallery", fr: "galerie" },
+      { en: "game", fr: "jeu" },
+      { en: "gang", fr: "gang" },
+      { en: "gap", fr: "écart" },
+      { en: "garage", fr: "garage" },
+      { en: "garden", fr: "jardin" },
+      { en: "garlic", fr: "ail" },
+      { en: "gas", fr: "gaz" },
+      { en: "gate", fr: "porte" },
+      { en: "gather", fr: "rassembler" },
+      { en: "gay", fr: "gay" },
+      { en: "gaze", fr: "regarder fixement" },
+      { en: "gear", fr: "engrenage" },
+      { en: "gender", fr: "genre" },
+      { en: "gene", fr: "gène" },
+      { en: "general", fr: "général" },
+      { en: "generally", fr: "généralement" },
+      { en: "generate", fr: "générer" },
+      { en: "generation", fr: "génération" },
+      { en: "genetic", fr: "génétique" },
+      { en: "gentleman", fr: "monsieur" },
+      { en: "gently", fr: "doucement" },
+      { en: "German", fr: "allemand" },
+      { en: "gesture", fr: "geste" },
+      { en: "get", fr: "obtenir" },
+      { en: "ghost", fr: "fantôme" },
+      { en: "giant", fr: "géant" },
+      { en: "gift", fr: "cadeau" },
+      { en: "gifted", fr: "doué" },
+      { en: "girl", fr: "fille" },
+      { en: "girlfriend", fr: "petite amie" },
+      { en: "give", fr: "donner" },
+      { en: "given", fr: "donné" },
+      { en: "glad", fr: "content" },
+      { en: "glance", fr: "coup d'œil" },
+      { en: "glass", fr: "verre" },
+      { en: "global", fr: "mondial" },
+      { en: "glove", fr: "gant" },
+      { en: "go", fr: "aller" },
+      { en: "goal", fr: "objectif" },
+      { en: "God", fr: "Dieu" },
+      { en: "gold", fr: "or" },
+      { en: "golden", fr: "doré" },
+      { en: "golf", fr: "golf" },
+      { en: "good", fr: "bon" },
+      { en: "government", fr: "gouvernement" },
+      { en: "governor", fr: "gouverneur" },
+      { en: "grab", fr: "saisir" },
+      { en: "grade", fr: "note" },
+      { en: "gradually", fr: "graduellement" },
+      { en: "graduate", fr: "diplômé" },
+      { en: "grain", fr: "grain" },
+      { en: "grand", fr: "grand" },
+      { en: "grandfather", fr: "grand-père" },
+      { en: "grandmother", fr: "grand-mère" },
+      { en: "grant", fr: "subvention" },
+      { en: "grass", fr: "herbe" },
+      { en: "grave", fr: "tombe" },
+      { en: "gray", fr: "gris" },
+      { en: "great", fr: "grand" },
+      { en: "greatest", fr: "le plus grand" },
+      { en: "green", fr: "vert" },
+      { en: "grocery", fr: "épicerie" },
+      { en: "ground", fr: "sol" },
+      { en: "group", fr: "groupe" },
+      { en: "grow", fr: "grandir" },
+      { en: "growing", fr: "croissant" },
+      { en: "growth", fr: "croissance" },
+      { en: "guarantee", fr: "garantir" },
+      { en: "guard", fr: "garde" },
+      { en: "guess", fr: "deviner" },
+      { en: "guest", fr: "invité" },
+      { en: "guide", fr: "guide" },
+      { en: "guideline", fr: "directive" },
+      { en: "guilty", fr: "coupable" },
+      { en: "gun", fr: "arme" },
+      { en: "guy", fr: "type" },
+      { en: "habit", fr: "habitude" },
+      { en: "habitat", fr: "habitat" },
+      { en: "hair", fr: "cheveux" },
+      { en: "half", fr: "moitié" },
+      { en: "hall", fr: "salle" },
+      { en: "hand", fr: "main" },
+      { en: "handful", fr: "poignée" },
+      { en: "handle", fr: "gérer" },
+      { en: "hang", fr: "accrocher" },
+      { en: "happen", fr: "arriver" },
+      { en: "happy", fr: "heureux" },
+      { en: "hard", fr: "dur" },
+      { en: "hardly", fr: "à peine" },
+      { en: "hat", fr: "chapeau" },
+      { en: "hate", fr: "détester" },
+      { en: "have", fr: "avoir" },
+      { en: "he", fr: "il" },
+      { en: "head", fr: "tête" },
+      { en: "headline", fr: "titre" },
+      { en: "headquarters", fr: "siège social" },
+      { en: "health", fr: "santé" },
+      { en: "healthy", fr: "en bonne santé" },
+      { en: "hear", fr: "entendre" },
+      { en: "hearing", fr: "audience" },
+      { en: "heart", fr: "cœur" },
+      { en: "heat", fr: "chaleur" },
+      { en: "heaven", fr: "paradis" },
+      { en: "heavily", fr: "lourdement" },
+      { en: "heavy", fr: "lourd" },
+      { en: "heel", fr: "talon" },
+      { en: "height", fr: "hauteur" },
+      { en: "helicopter", fr: "hélicoptère" },
+      { en: "hell", fr: "enfer" },
+      { en: "hello", fr: "bonjour" },
+      { en: "help", fr: "aider" },
+      { en: "helpful", fr: "utile" },
+      { en: "her", fr: "son" },
+      { en: "here", fr: "ici" },
+      { en: "heritage", fr: "patrimoine" },
+      { en: "hero", fr: "héros" },
+      { en: "herself", fr: "elle-même" },
+      { en: "hey", fr: "salut" },
+      { en: "hi", fr: "salut" },
+      { en: "hide", fr: "cacher" },
+      { en: "high", fr: "haut" },
+      { en: "highlight", fr: "souligner" },
+      { en: "highly", fr: "hautement" },
+      { en: "highway", fr: "autoroute" },
+      { en: "hill", fr: "colline" },
+      { en: "him", fr: "lui" },
+      { en: "himself", fr: "lui-même" },
+      { en: "hip", fr: "hanche" },
+      { en: "hire", fr: "embaucher" },
+      { en: "his", fr: "son" },
+      { en: "historian", fr: "historien" },
+      { en: "historic", fr: "historique" },
+      { en: "historical", fr: "historique" },
+      { en: "history", fr: "histoire" },
+      { en: "hit", fr: "frapper" },
+      { en: "hold", fr: "tenir" },
+      { en: "hole", fr: "trou" },
+      { en: "holiday", fr: "vacances" },
+      { en: "holy", fr: "saint" },
+      { en: "home", fr: "maison" },
+      { en: "homeless", fr: "sans-abri" },
+      { en: "honest", fr: "honnête" },
+      { en: "honey", fr: "miel" },
+      { en: "honor", fr: "honneur" },
+      { en: "hope", fr: "espoir" },
+      { en: "horizon", fr: "horizon" },
+      { en: "horror", fr: "horreur" },
+      { en: "horse", fr: "cheval" },
+      { en: "hospital", fr: "hôpital" },
+      { en: "host", fr: "hôte" },
+      { en: "hot", fr: "chaud" },
+      { en: "hotel", fr: "hôtel" },
+      { en: "hour", fr: "heure" },
+      { en: "house", fr: "maison" },
+      { en: "household", fr: "ménage" },
+      { en: "housing", fr: "logement" },
+      { en: "how", fr: "comment" },
+      { en: "however", fr: "cependant" },
+      { en: "huge", fr: "énorme" },
+      { en: "human", fr: "humain" },
+      { en: "humor", fr: "humour" },
+      { en: "hundred", fr: "cent" },
+      { en: "hungry", fr: "affamé" },
+      { en: "hunter", fr: "chasseur" },
+      { en: "hunting", fr: "chasse" },
+      { en: "hurt", fr: "blesser" },
+      { en: "husband", fr: "mari" },
+      { en: "hypothesis", fr: "hypothèse" },
+      { en: "I", fr: "je" },
+      { en: "ice", fr: "glace" },
+      { en: "idea", fr: "idée" },
+      { en: "ideal", fr: "idéal" },
+      { en: "identification", fr: "identification" },
+      { en: "identify", fr: "identifier" },
+      { en: "identity", fr: "identité" },
+      { en: "ie", fr: "c'est-à-dire" },
+      { en: "if", fr: "si" },
+      { en: "ignore", fr: "ignorer" },
+      { en: "ill", fr: "malade" },
+      { en: "illegal", fr: "illégal" },
+      { en: "illness", fr: "maladie" },
+      { en: "illustrate", fr: "illustrer" },
+      { en: "image", fr: "image" },
+      { en: "imagination", fr: "imagination" },
+      { en: "imagine", fr: "imaginer" },
+      { en: "immediate", fr: "immédiat" },
+      { en: "immediately", fr: "immédiatement" },
+      { en: "immigrant", fr: "immigrant" },
+      { en: "immigration", fr: "immigration" },
+      { en: "impact", fr: "impact" },
+      { en: "implement", fr: "mettre en œuvre" },
+      { en: "implication", fr: "implication" },
+      { en: "imply", fr: "impliquer" },
+      { en: "importance", fr: "importance" },
+      { en: "important", fr: "important" },
+      { en: "impose", fr: "imposer" },
+      { en: "impossible", fr: "impossible" },
+      { en: "impress", fr: "impressionner" },
+      { en: "impression", fr: "impression" },
+      { en: "impressive", fr: "impressionnant" },
+      { en: "improve", fr: "améliorer" },
+      { en: "improvement", fr: "amélioration" },
+      { en: "in", fr: "dans" },
+      { en: "incentive", fr: "incitation" },
+      { en: "incident", fr: "incident" },
+      { en: "include", fr: "inclure" },
+      { en: "including", fr: "y compris" },
+      { en: "income", fr: "revenu" },
+      { en: "incorporate", fr: "incorporer" },
+      { en: "increase", fr: "augmenter" },
+      { en: "increased", fr: "augmenté" },
+      { en: "increasing", fr: "croissant" },
+      { en: "increasingly", fr: "de plus en plus" },
+      { en: "incredible", fr: "incroyable" },
+      { en: "indeed", fr: "en effet" },
+      { en: "independence", fr: "indépendance" },
+      { en: "independent", fr: "indépendant" },
+      { en: "index", fr: "indice" },
+      { en: "Indian", fr: "indien" },
+      { en: "indicate", fr: "indiquer" },
+      { en: "indication", fr: "indication" },
+      { en: "individual", fr: "individu" },
+      { en: "industrial", fr: "industriel" },
+      { en: "industry", fr: "industrie" },
+      { en: "infant", fr: "nourrisson" },
+      { en: "infection", fr: "infection" },
+      { en: "inflation", fr: "inflation" },
+      { en: "influence", fr: "influence" },
+      { en: "inform", fr: "informer" },
+      { en: "information", fr: "information" },
+      { en: "ingredient", fr: "ingrédient" },
+      { en: "initial", fr: "initial" },
+      { en: "initially", fr: "initialement" },
+      { en: "initiative", fr: "initiative" },
+      { en: "injury", fr: "blessure" },
+      { en: "inner", fr: "intérieur" },
+      { en: "innocent", fr: "innocent" },
+      { en: "inquiry", fr: "enquête" },
+      { en: "inside", fr: "intérieur" },
+      { en: "insight", fr: "perspicacité" },
+      { en: "insist", fr: "insister" },
+      { en: "inspire", fr: "inspirer" },
+      { en: "install", fr: "installer" },
+      { en: "instance", fr: "instance" },
+      { en: "instead", fr: "au lieu de" },
+      { en: "institution", fr: "institution" },
+      { en: "institutional", fr: "institutionnel" },
+      { en: "instruction", fr: "instruction" },
+      { en: "instructor", fr: "instructeur" },
+      { en: "instrument", fr: "instrument" },
+      { en: "insurance", fr: "assurance" },
+      { en: "intellectual", fr: "intellectuel" },
+      { en: "intelligence", fr: "intelligence" },
+      { en: "intend", fr: "avoir l'intention" },
+      { en: "intense", fr: "intense" },
+      { en: "intensity", fr: "intensité" },
+      { en: "intention", fr: "intention" },
+      { en: "interaction", fr: "interaction" },
+      { en: "interest", fr: "intérêt" },
+      { en: "interested", fr: "intéressé" },
+      { en: "interesting", fr: "intéressant" },
+      { en: "internal", fr: "interne" },
+      { en: "international", fr: "international" },
+      { en: "Internet", fr: "Internet" },
+      { en: "interpret", fr: "interpréter" },
+      { en: "interpretation", fr: "interprétation" },
+      { en: "intervention", fr: "intervention" },
+      { en: "interview", fr: "entretien" },
+      { en: "into", fr: "dans" },
+      { en: "introduce", fr: "présenter" },
+      { en: "introduction", fr: "introduction" },
+      { en: "invasion", fr: "invasion" },
+      { en: "invest", fr: "investir" },
+      { en: "investigate", fr: "enquêter" },
+      { en: "investigation", fr: "enquête" },
+      { en: "investigator", fr: "enquêteur" },
+      { en: "investment", fr: "investissement" },
+      { en: "investor", fr: "investisseur" },
+      { en: "invite", fr: "inviter" },
+      { en: "involve", fr: "impliquer" },
+      { en: "involved", fr: "impliqué" },
+      { en: "involvement", fr: "implication" },
+      { en: "Iraqi", fr: "irakien" },
+      { en: "Irish", fr: "irlandais" },
+      { en: "iron", fr: "fer" },
+      { en: "Islamic", fr: "islamique" },
+      { en: "island", fr: "île" },
+      { en: "Israeli", fr: "israélien" },
+      { en: "issue", fr: "problème" },
+      { en: "it", fr: "il" },
+      { en: "Italian", fr: "italien" },
+      { en: "item", fr: "article" },
+      { en: "its", fr: "son" },
+      { en: "itself", fr: "lui-même" },
+      { en: "jacket", fr: "veste" },
+      { en: "jail", fr: "prison" },
+      { en: "Japanese", fr: "japonais" },
+      { en: "jet", fr: "avion à réaction" },
+      { en: "Jew", fr: "juif" },
+      { en: "Jewish", fr: "juif" },
+      { en: "job", fr: "travail" },
+      { en: "join", fr: "rejoindre" },
+      { en: "joint", fr: "articulation" },
+      { en: "joke", fr: "blague" },
+      { en: "journal", fr: "journal" },
+      { en: "journalist", fr: "journaliste" },
+      { en: "journey", fr: "voyage" },
+      { en: "joy", fr: "joie" },
+      { en: "judge", fr: "juge" },
+      { en: "judgment", fr: "jugement" },
+      { en: "juice", fr: "jus" },
+      { en: "jump", fr: "sauter" },
+      { en: "junior", fr: "junior" },
+      { en: "jury", fr: "jury" },
+      { en: "just", fr: "juste" },
+      { en: "justice", fr: "justice" },
+      { en: "justify", fr: "justifier" },
+      { en: "keep", fr: "garder" },
+      { en: "key", fr: "clé" },
+      { en: "kick", fr: "donner un coup de pied" },
+      { en: "kid", fr: "enfant" },
+      { en: "kill", fr: "tuer" },
+      { en: "killer", fr: "tueur" },
+      { en: "killing", fr: "meurtre" },
+      { en: "kind", fr: "gentil" },
+      { en: "king", fr: "roi" },
+      { en: "kiss", fr: "embrasser" },
+      { en: "kitchen", fr: "cuisine" },
+      { en: "knee", fr: "genou" },
+      { en: "knife", fr: "couteau" },
+      { en: "knock", fr: "frapper" },
+      { en: "know", fr: "savoir" },
+      { en: "knowledge", fr: "connaissance" },
+      { en: "lab", fr: "laboratoire" },
+      { en: "label", fr: "étiquette" },
+      { en: "labor", fr: "travail" },
+      { en: "laboratory", fr: "laboratoire" },
+      { en: "lack", fr: "manque" },
+      { en: "lady", fr: "dame" },
+      { en: "lake", fr: "lac" },
+      { en: "land", fr: "terre" },
+      { en: "landscape", fr: "paysage" },
+      { en: "language", fr: "langue" },
+      { en: "lap", fr: "genoux" },
+      { en: "large", fr: "grand" },
+      { en: "largely", fr: "largement" },
+      { en: "last", fr: "dernier" },
+      { en: "late", fr: "tard" },
+      { en: "later", fr: "plus tard" },
+      { en: "Latin", fr: "latin" },
+      { en: "latter", fr: "dernier" },
+      { en: "laugh", fr: "rire" },
+      { en: "launch", fr: "lancer" },
+      { en: "law", fr: "loi" },
+      { en: "lawn", fr: "pelouse" },
+      { en: "lawsuit", fr: "procès" },
+      { en: "lawyer", fr: "avocat" },
+      { en: "lay", fr: "poser" },
+      { en: "layer", fr: "couche" },
+      { en: "lead", fr: "mener" },
+      { en: "leader", fr: "dirigeant" },
+      { en: "leadership", fr: "leadership" },
+      { en: "leading", fr: "menant" },
+      { en: "leaf", fr: "feuille" },
+      { en: "league", fr: "ligue" },
+      { en: "lean", fr: "pencher" },
+      { en: "learn", fr: "apprendre" },
+      { en: "learning", fr: "apprentissage" },
+      { en: "least", fr: "moins" },
+      { en: "leather", fr: "cuir" },
+      { en: "leave", fr: "partir" },
+      { en: "left", fr: "gauche" },
+      { en: "leg", fr: "jambe" },
+      { en: "legacy", fr: "héritage" },
+      { en: "legal", fr: "légal" },
+      { en: "legend", fr: "légende" },
+      { en: "legislation", fr: "législation" },
+      { en: "legitimate", fr: "légitime" },
+      { en: "lemon", fr: "citron" },
+      { en: "length", fr: "longueur" },
+      { en: "less", fr: "moins" },
+      { en: "lesson", fr: "leçon" },
+      { en: "let", fr: "laisser" },
+      { en: "letter", fr: "lettre" },
+      { en: "level", fr: "niveau" },
+      { en: "liberal", fr: "libéral" },
+      { en: "library", fr: "bibliothèque" },
+      { en: "license", fr: "permis" },
+      { en: "lie", fr: "mentir" },
+      { en: "life", fr: "vie" },
+      { en: "lifestyle", fr: "mode de vie" },
+      { en: "lifetime", fr: "vie" },
+      { en: "lift", fr: "ascenseur" },
+      { en: "light", fr: "lumière" },
+      { en: "like", fr: "comme" },
+      { en: "likely", fr: "probable" },
+      { en: "limit", fr: "limite" },
+      { en: "limitation", fr: "limitation" },
+      { en: "limited", fr: "limité" },
+      { en: "line", fr: "ligne" },
+      { en: "link", fr: "lien" },
+      { en: "lip", fr: "lèvre" },
+      { en: "list", fr: "liste" },
+      { en: "listen", fr: "écouter" },
+      { en: "literally", fr: "littéralement" },
+      { en: "literary", fr: "littéraire" },
+      { en: "literature", fr: "littérature" },
+      { en: "little", fr: "petit" },
+      { en: "live", fr: "vivre" },
+      { en: "living", fr: "vivant" },
+      { en: "load", fr: "charger" },
+      { en: "loan", fr: "prêt" },
+      { en: "local", fr: "local" },
+      { en: "locate", fr: "localiser" },
+      { en: "location", fr: "emplacement" },
+      { en: "lock", fr: "verrouiller" },
+      { en: "long", fr: "long" },
+      { en: "long-term", fr: "à long terme" },
+      { en: "look", fr: "regarder" },
+      { en: "loose", fr: "lâche" },
+      { en: "lose", fr: "perdre" },
+      { en: "loss", fr: "perte" },
+      { en: "lost", fr: "perdu" },
+      { en: "lot", fr: "beaucoup" },
+      { en: "lots", fr: "beaucoup" },
+      { en: "loud", fr: "fort" },
+      { en: "love", fr: "aimer" },
+      { en: "lovely", fr: "charmant" },
+      { en: "lover", fr: "amoureux" },
+      { en: "low", fr: "bas" },
+      { en: "lower", fr: "abaisser" },
+      { en: "luck", fr: "chance" },
+      { en: "lucky", fr: "chanceux" },
+      { en: "lunch", fr: "déjeuner" },
+      { en: "lung", fr: "poumon" },
+      { en: "machine", fr: "machine" },
+      { en: "mad", fr: "fou" },
+      { en: "magazine", fr: "magazine" },
+      { en: "mail", fr: "courrier" },
+      { en: "main", fr: "principal" },
+      { en: "mainly", fr: "principalement" },
+      { en: "maintain", fr: "maintenir" },
+      { en: "maintenance", fr: "entretien" },
+      { en: "major", fr: "majeur" },
+      { en: "majority", fr: "majorité" },
+      { en: "make", fr: "faire" },
+      { en: "maker", fr: "fabricant" },
+      { en: "makeup", fr: "maquillage" },
+      { en: "male", fr: "homme" },
+      { en: "mall", fr: "centre commercial" },
+      { en: "man", fr: "homme" },
+      { en: "manage", fr: "gérer" },
+      { en: "management", fr: "gestion" },
+      { en: "manager", fr: "directeur" },
+      { en: "manner", fr: "manière" },
+      { en: "manufacturer", fr: "fabricant" },
+      { en: "manufacturing", fr: "fabrication" },
+      { en: "many", fr: "beaucoup" },
+      { en: "map", fr: "carte" },
+      { en: "margin", fr: "marge" },
+      { en: "mark", fr: "marquer" },
+      { en: "market", fr: "marché" },
+      { en: "marketing", fr: "marketing" },
+      { en: "marriage", fr: "mariage" },
+      { en: "married", fr: "marié" },
+      { en: "marry", fr: "marier" },
+      { en: "mask", fr: "masque" },
+      { en: "mass", fr: "masse" },
+      { en: "massive", fr: "massif" },
+      { en: "master", fr: "maître" },
+      { en: "match", fr: "allumette" },
+      { en: "material", fr: "matériel" },
+      { en: "math", fr: "mathématiques" },
+      { en: "matter", fr: "importer" },
+      { en: "may", fr: "peut" },
+      { en: "maybe", fr: "peut-être" },
+      { en: "mayor", fr: "maire" },
+      { en: "me", fr: "moi" },
+      { en: "meal", fr: "repas" },
+      { en: "mean", fr: "signifier" },
+      { en: "meaning", fr: "signification" },
+      { en: "meanwhile", fr: "pendant ce temps" },
+      { en: "measure", fr: "mesurer" },
+      { en: "measurement", fr: "mesure" },
+      { en: "meat", fr: "viande" },
+      { en: "mechanism", fr: "mécanisme" },
+      { en: "media", fr: "médias" },
+      { en: "medical", fr: "médical" },
+      { en: "medication", fr: "médicament" },
+      { en: "medicine", fr: "médecine" },
+      { en: "medium", fr: "moyen" },
+      { en: "meet", fr: "rencontrer" },
+      { en: "meeting", fr: "réunion" },
+      { en: "member", fr: "membre" },
+      { en: "membership", fr: "adhésion" },
+      { en: "memory", fr: "mémoire" },
+      { en: "mental", fr: "mental" },
+      { en: "mention", fr: "mentionner" },
+      { en: "menu", fr: "menu" },
+      { en: "mere", fr: "simple" },
+      { en: "merely", fr: "simplement" },
+      { en: "mess", fr: "désordre" },
+      { en: "message", fr: "message" },
+      { en: "metal", fr: "métal" },
+      { en: "meter", fr: "mètre" },
+      { en: "method", fr: "méthode" },
+      { en: "Mexican", fr: "mexicain" },
+      { en: "middle", fr: "milieu" },
+      { en: "might", fr: "pourrait" },
+      { en: "military", fr: "militaire" },
+      { en: "milk", fr: "lait" },
+      { en: "million", fr: "million" },
+      { en: "mind", fr: "esprit" },
+      { en: "mine", fr: "le mien" },
+      { en: "minister", fr: "ministre" },
+      { en: "minor", fr: "mineur" },
+      { en: "minority", fr: "minorité" },
+      { en: "minute", fr: "minute" },
+      { en: "miracle", fr: "miracle" },
+      { en: "mirror", fr: "miroir" },
+      { en: "miss", fr: "manquer" },
+      { en: "missile", fr: "missile" },
+      { en: "mission", fr: "mission" },
+      { en: "mistake", fr: "erreur" },
+      { en: "mix", fr: "mélanger" },
+      { en: "mixture", fr: "mélange" },
+      { en: "mm-hmm", fr: "mm-hmm" },
+      { en: "mode", fr: "mode" },
+      { en: "model", fr: "modèle" },
+      { en: "moderate", fr: "modérer" },
+      { en: "modern", fr: "moderne" },
+      { en: "modest", fr: "modeste" },
+      { en: "mom", fr: "maman" },
+      { en: "moment", fr: "moment" },
+      { en: "money", fr: "argent" },
+      { en: "monitor", fr: "surveiller" },
+      { en: "month", fr: "mois" },
+      { en: "mood", fr: "humeur" },
+      { en: "moon", fr: "lune" },
+      { en: "moral", fr: "moral" },
+      { en: "more", fr: "plus" },
+      { en: "moreover", fr: "de plus" },
+      { en: "morning", fr: "matin" },
+      { en: "mortgage", fr: "hypothèque" },
+      { en: "most", fr: "plus" },
+      { en: "mostly", fr: "principalement" },
+      { en: "mother", fr: "mère" },
+      { en: "motion", fr: "mouvement" },
+      { en: "motivation", fr: "motivation" },
+      { en: "motor", fr: "moteur" },
+      { en: "mount", fr: "monter" },
+      { en: "mountain", fr: "montagne" },
+      { en: "mouse", fr: "souris" },
+      { en: "mouth", fr: "bouche" },
+      { en: "move", fr: "bouger" },
+      { en: "movement", fr: "mouvement" },
+      { en: "movie", fr: "film" },
+      { en: "Mr", fr: "M." },
+      { en: "Mrs", fr: "Mme" },
+      { en: "Ms", fr: "Mlle" },
+      { en: "much", fr: "beaucoup" },
+      { en: "multiple", fr: "multiple" },
+      { en: "murder", fr: "meurtre" },
+      { en: "muscle", fr: "muscle" },
+      { en: "museum", fr: "musée" },
+      { en: "music", fr: "musique" },
+      { en: "musical", fr: "musical" },
+      { en: "musician", fr: "musicien" },
+      { en: "Muslim", fr: "musulman" },
+      { en: "must", fr: "doit" },
+      { en: "mutual", fr: "mutuel" },
+      { en: "my", fr: "mon" },
+      { en: "myself", fr: "moi-même" },
+      { en: "mystery", fr: "mystère" },
+      { en: "myth", fr: "mythe" },
+      { en: "naked", fr: "nu" },
+      { en: "name", fr: "nom" },
+      { en: "narrative", fr: "récit" },
+      { en: "narrow", fr: "étroit" },
+      { en: "nation", fr: "nation" },
+      { en: "national", fr: "national" },
+      { en: "native", fr: "natif" },
+      { en: "natural", fr: "naturel" },
+      { en: "naturally", fr: "naturellement" },
+      { en: "nature", fr: "nature" },
+      { en: "near", fr: "proche" },
+      { en: "nearby", fr: "proche" },
+      { en: "nearly", fr: "presque" },
+      { en: "necessarily", fr: "nécessairement" },
+      { en: "necessary", fr: "nécessaire" },
+      { en: "neck", fr: "cou" },
+      { en: "need", fr: "besoin" },
+      { en: "negative", fr: "négatif" },
+      { en: "negotiate", fr: "négocier" },
+      { en: "negotiation", fr: "négociation" },
+      { en: "neighbor", fr: "voisin" },
+      { en: "neighborhood", fr: "quartier" },
+      { en: "neither", fr: "ni l'un ni l'autre" },
+      { en: "nerve", fr: "nerf" },
+      { en: "nervous", fr: "nerveux" },
+      { en: "net", fr: "net" },
+      { en: "network", fr: "réseau" },
+      { en: "never", fr: "jamais" },
+      { en: "nevertheless", fr: "néanmoins" },
+      { en: "new", fr: "nouveau" },
+      { en: "newly", fr: "nouvellement" },
+      { en: "news", fr: "nouvelles" },
+      { en: "newspaper", fr: "journal" },
+      { en: "next", fr: "suivant" },
+      { en: "nice", fr: "gentil" },
+      { en: "night", fr: "nuit" },
+      { en: "nine", fr: "neuf" },
+      { en: "no", fr: "non" },
+      { en: "nobody", fr: "personne" },
+      { en: "nod", fr: "hocher la tête" },
+      { en: "noise", fr: "bruit" },
+      { en: "nomination", fr: "nomination" },
+      { en: "none", fr: "aucun" },
+      { en: "nonetheless", fr: "néanmoins" },
+      { en: "nor", fr: "ni" },
+      { en: "normal", fr: "normal" },
+      { en: "normally", fr: "normalement" },
+      { en: "north", fr: "nord" },
+      { en: "northern", fr: "nordique" },
+      { en: "nose", fr: "nez" },
+      { en: "not", fr: "ne pas" },
+      { en: "note", fr: "note" },
+      { en: "nothing", fr: "rien" },
+      { en: "notice", fr: "remarquer" },
+      { en: "notion", fr: "notion" },
+      { en: "novel", fr: "roman" },
+      { en: "now", fr: "maintenant" },
+      { en: "nowhere", fr: "nulle part" },
+      { en: "n't", fr: "ne pas" },
+      { en: "nuclear", fr: "nucléaire" },
+      { en: "number", fr: "nombre" },
+      { en: "numerous", fr: "nombreux" },
+      { en: "nurse", fr: "infirmière" },
+      { en: "nut", fr: "noix" },
+      { en: "object", fr: "objet" },
+      { en: "objective", fr: "objectif" },
+      { en: "obligation", fr: "obligation" },
+      { en: "observation", fr: "observation" },
+      { en: "observe", fr: "observer" },
+      { en: "observer", fr: "observateur" },
+      { en: "obtain", fr: "obtenir" },
+      { en: "obvious", fr: "évident" },
+      { en: "obviously", fr: "évidemment" },
+      { en: "occasion", fr: "occasion" },
+      { en: "occasionally", fr: "occasionnellement" },
+      { en: "occupation", fr: "occupation" },
+      { en: "occupy", fr: "occuper" },
+      { en: "occur", fr: "se produire" },
+      { en: "ocean", fr: "océan" },
+      { en: "odd", fr: "étrange" },
+      { en: "odds", fr: "chances" },
+      { en: "of", fr: "de" },
+      { en: "off", fr: "désactivé" },
+      { en: "offense", fr: "infraction" },
+      { en: "offensive", fr: "offensant" },
+      { en: "offer", fr: "offrir" },
+      { en: "office", fr: "bureau" },
+      { en: "officer", fr: "officier" },
+      { en: "official", fr: "officiel" },
+      { en: "often", fr: "souvent" },
+      { en: "oh", fr: "oh" },
+      { en: "oil", fr: "huile" },
+      { en: "ok", fr: "ok" },
+      { en: "okay", fr: "d'accord" },
+      { en: "old", fr: "vieux" },
+      { en: "Olympic", fr: "olympique" },
+      { en: "on", fr: "sur" },
+      { en: "once", fr: "une fois" },
+      { en: "one", fr: "un" },
+      { en: "ongoing", fr: "en cours" },
+      { en: "onion", fr: "oignon" },
+      { en: "online", fr: "en ligne" },
+      { en: "only", fr: "seulement" },
+      { en: "onto", fr: "sur" },
+      { en: "open", fr: "ouvrir" },
+      { en: "opening", fr: "ouverture" },
+      { en: "operate", fr: "opérer" },
+      { en: "operating", fr: "opérationnel" },
+      { en: "operation", fr: "opération" },
+      { en: "operator", fr: "opérateur" },
+      { en: "opinion", fr: "opinion" },
+      { en: "opponent", fr: "adversaire" },
+      { en: "opportunity", fr: "opportunité" },
+      { en: "oppose", fr: "s'opposer" },
+      { en: "opposite", fr: "opposé" },
+      { en: "opposition", fr: "opposition" },
+      { en: "option", fr: "option" },
+      { en: "or", fr: "ou" },
+      { en: "orange", fr: "orange" },
+      { en: "order", fr: "commander" },
+      { en: "ordinary", fr: "ordinaire" },
+      { en: "organic", fr: "biologique" },
+      { en: "organization", fr: "organisation" },
+      { en: "organize", fr: "organiser" },
+      { en: "orientation", fr: "orientation" },
+      { en: "origin", fr: "origine" },
+      { en: "original", fr: "original" },
+      { en: "originally", fr: "à l'origine" },
+      { en: "other", fr: "autre" },
+      { en: "others", fr: "autres" },
+      { en: "otherwise", fr: "autrement" },
+      { en: "ought", fr: "devrait" },
+      { en: "our", fr: "notre" },
+      { en: "ourselves", fr: "nous-mêmes" },
+      { en: "out", fr: "dehors" },
+      { en: "outcome", fr: "résultat" },
+      { en: "outside", fr: "extérieur" },
+      { en: "oven", fr: "four" },
+      { en: "over", fr: "sur" },
+      { en: "overall", fr: "globalement" },
+      { en: "overcome", fr: "surmonter" },
+      { en: "overlook", fr: "négliger" },
+      { en: "owe", fr: "devoir" },
+      { en: "own", fr: "posséder" },
+      { en: "owner", fr: "propriétaire" },
+      { en: "pace", fr: "rythme" },
+      { en: "pack", fr: "emballer" },
+      { en: "package", fr: "paquet" },
+      { en: "page", fr: "page" },
+      { en: "pain", fr: "douleur" },
+      { en: "painful", fr: "douloureux" },
+      { en: "paint", fr: "peindre" },
+      { en: "painter", fr: "peintre" },
+      { en: "painting", fr: "peinture" },
+      { en: "pair", fr: "paire" },
+      { en: "pale", fr: "pâle" },
+      { en: "Palestinian", fr: "palestinien" },
+      { en: "palm", fr: "paume" },
+      { en: "pan", fr: "poêle" },
+      { en: "panel", fr: "panneau" },
+      { en: "pant", fr: "pantalon" },
+      { en: "paper", fr: "papier" },
+      { en: "parent", fr: "parent" },
+      { en: "park", fr: "parc" },
+      { en: "parking", fr: "stationnement" },
+      { en: "part", fr: "partie" },
+      { en: "participant", fr: "participant" },
+      { en: "participate", fr: "participer" },
+      { en: "participation", fr: "participation" },
+      { en: "particular", fr: "particulier" },
+      { en: "particularly", fr: "particulièrement" },
+      { en: "partly", fr: "partiellement" },
+      { en: "partner", fr: "partenaire" },
+      { en: "partnership", fr: "partenariat" },
+      { en: "party", fr: "fête" },
+      { en: "pass", fr: "passer" },
+      { en: "passage", fr: "passage" },
+      { en: "passenger", fr: "passager" },
+      { en: "passion", fr: "passion" },
+      { en: "past", fr: "passé" },
+      { en: "patch", fr: "patch" },
+      { en: "path", fr: "chemin" },
+      { en: "patient", fr: "patient" },
+      { en: "pattern", fr: "motif" },
+      { en: "pause", fr: "pause" },
+      { en: "pay", fr: "payer" },
+      { en: "payment", fr: "paiement" },
+      { en: "PC", fr: "ordinateur personnel" },
+      { en: "peace", fr: "paix" },
+      { en: "peak", fr: "pic" },
+      { en: "peer", fr: "pair" },
+      { en: "penalty", fr: "pénalité" },
+      { en: "people", fr: "gens" },
+      { en: "pepper", fr: "poivre" },
+      { en: "per", fr: "par" },
+      { en: "perceive", fr: "percevoir" },
+      { en: "percentage", fr: "pourcentage" },
+      { en: "perception", fr: "perception" },
+      { en: "perfect", fr: "parfait" },
+      { en: "perfectly", fr: "parfaitement" },
+      { en: "perform", fr: "exécuter" },
+      { en: "performance", fr: "performance" },
+      { en: "perhaps", fr: "peut-être" },
+      { en: "period", fr: "période" },
+      { en: "permanent", fr: "permanent" },
+      { en: "permission", fr: "autorisation" },
+      { en: "permit", fr: "permettre" },
+      { en: "person", fr: "personne" },
+      { en: "personal", fr: "personnel" },
+      { en: "personality", fr: "personnalité" },
+      { en: "personally", fr: "personnellement" },
+      { en: "personnel", fr: "personnel" },
+      { en: "perspective", fr: "perspective" },
+      { en: "persuade", fr: "persuader" },
+      { en: "pet", fr: "animal de compagnie" },
+      { en: "phase", fr: "phase" },
+      { en: "phenomenon", fr: "phénomène" },
+      { en: "philosophy", fr: "philosophie" },
+      { en: "phone", fr: "téléphone" },
+      { en: "photo", fr: "photo" },
+      { en: "photograph", fr: "photographie" },
+      { en: "photographer", fr: "photographe" },
+      { en: "phrase", fr: "phrase" },
+      { en: "physical", fr: "physique" },
+      { en: "physically", fr: "physiquement" },
+      { en: "physician", fr: "médecin" },
+      { en: "piano", fr: "piano" },
+      { en: "pick", fr: "choisir" },
+      { en: "picture", fr: "image" },
+      { en: "pie", fr: "tarte" },
+      { en: "piece", fr: "morceau" },
+      { en: "pile", fr: "tas" },
+      { en: "pilot", fr: "pilote" },
+      { en: "pine", fr: "pin" },
+      { en: "pink", fr: "rose" },
+      { en: "pipe", fr: "tuyau" },
+      { en: "pitch", fr: "terrain" },
+      { en: "place", fr: "endroit" },
+      { en: "plan", fr: "plan" },
+      { en: "plane", fr: "avion" },
+      { en: "planet", fr: "planète" },
+      { en: "planning", fr: "planification" },
+      { en: "plant", fr: "plante" },
+      { en: "plastic", fr: "plastique" },
+      { en: "plate", fr: "assiette" },
+      { en: "platform", fr: "plateforme" },
+      { en: "play", fr: "jouer" },
+      { en: "player", fr: "joueur" },
+      { en: "please", fr: "s'il vous plaît" },
+      { en: "pleasure", fr: "plaisir" },
+      { en: "plenty", fr: "beaucoup" },
+      { en: "plot", fr: "intrigue" },
+      { en: "plus", fr: "plus" },
+      { en: "PM", fr: "PM" },
+      { en: "pocket", fr: "poche" },
+      { en: "poem", fr: "poème" },
+      { en: "poet", fr: "poète" },
+      { en: "poetry", fr: "poésie" },
+      { en: "point", fr: "point" },
+      { en: "pole", fr: "pôle" },
+      { en: "police", fr: "police" },
+      { en: "policy", fr: "politique" },
+      { en: "political", fr: "politique" },
+      { en: "politically", fr: "politiquement" },
+      { en: "politician", fr: "politicien" },
+      { en: "politics", fr: "politique" },
+      { en: "poll", fr: "sondage" },
+      { en: "pollution", fr: "pollution" },
+      { en: "pool", fr: "piscine" },
+      { en: "poor", fr: "pauvre" },
+      { en: "pop", fr: "pop" },
+      { en: "popular", fr: "populaire" },
+      { en: "population", fr: "population" },
+      { en: "porch", fr: "porche" },
+      { en: "port", fr: "port" },
+      { en: "portion", fr: "portion" },
+      { en: "portrait", fr: "portrait" },
+      { en: "portray", fr: "dépeindre" },
+      { en: "pose", fr: "poser" },
+      { en: "position", fr: "position" },
+      { en: "positive", fr: "positif" },
+      { en: "possess", fr: "posséder" },
+      { en: "possibility", fr: "possibilité" },
+      { en: "possible", fr: "possible" },
+      { en: "possibly", fr: "possiblement" },
+      { en: "post", fr: "poster" },
+      { en: "pot", fr: "pot" },
+      { en: "potato", fr: "pomme de terre" },
+      { en: "potential", fr: "potentiel" },
+      { en: "potentially", fr: "potentiellement" },
+      { en: "pound", fr: "livre" },
+      { en: "pour", fr: "verser" },
+      { en: "poverty", fr: "pauvreté" },
+      { en: "powder", fr: "poudre" },
+      { en: "power", fr: "pouvoir" },
+      { en: "powerful", fr: "puissant" },
+      { en: "practical", fr: "pratique" },
+      { en: "practice", fr: "pratique" },
+      { en: "pray", fr: "prier" },
+      { en: "prayer", fr: "prière" },
+      { en: "precisely", fr: "précisément" },
+      { en: "predict", fr: "prédire" },
+      { en: "prefer", fr: "préférer" },
+      { en: "preference", fr: "préférence" },
+      { en: "pregnancy", fr: "grossesse" },
+      { en: "pregnant", fr: "enceinte" },
+      { en: "preparation", fr: "préparation" },
+      { en: "prepare", fr: "préparer" },
+      { en: "prescription", fr: "ordonnance" },
+      { en: "presence", fr: "présence" },
+      { en: "present", fr: "présent" },
+      { en: "presentation", fr: "présentation" },
+      { en: "preserve", fr: "préserver" },
+      { en: "president", fr: "président" },
+      { en: "presidential", fr: "présidentiel" },
+      { en: "press", fr: "presse" },
+      { en: "pressure", fr: "pression" },
+      { en: "pretend", fr: "prétendre" },
+      { en: "pretty", fr: "joli" },
+      { en: "prevent", fr: "empêcher" },
+      { en: "previous", fr: "précédent" },
+      { en: "previously", fr: "précédemment" },
+      { en: "price", fr: "prix" },
+      { en: "pride", fr: "fierté" },
+      { en: "priest", fr: "prêtre" },
+      { en: "primarily", fr: "principalement" },
+      { en: "primary", fr: "primaire" },
+      { en: "prime", fr: "premier" },
+      { en: "principal", fr: "principal" },
+      { en: "principle", fr: "principe" },
+      { en: "print", fr: "imprimer" },
+      { en: "prior", fr: "avant" },
+      { en: "priority", fr: "priorité" },
+      { en: "prison", fr: "prison" },
+      { en: "prisoner", fr: "prisonnier" },
+      { en: "privacy", fr: "confidentialité" },
+      { en: "private", fr: "privé" },
+      { en: "probably", fr: "probablement" },
+      { en: "problem", fr: "problème" },
+      { en: "procedure", fr: "procédure" },
+      { en: "proceed", fr: "procéder" },
+      { en: "process", fr: "processus" },
+      { en: "produce", fr: "produire" },
+      { en: "producer", fr: "producteur" },
+      { en: "product", fr: "produit" },
+      { en: "production", fr: "production" },
+      { en: "profession", fr: "profession" },
+      { en: "professional", fr: "professionnel" },
+      { en: "professor", fr: "professeur" },
+      { en: "profile", fr: "profil" },
+      { en: "profit", fr: "profit" },
+      { en: "program", fr: "programme" },
+      { en: "progress", fr: "progrès" },
+      { en: "project", fr: "projet" },
+      { en: "prominent", fr: "éminent" },
+      { en: "promise", fr: "promettre" },
+      { en: "promote", fr: "promouvoir" },
+      { en: "prompt", fr: "rapide" },
+      { en: "proof", fr: "preuve" },
+      { en: "proper", fr: "propre" },
+      { en: "properly", fr: "correctement" },
+      { en: "property", fr: "propriété" },
+      { en: "proportion", fr: "proportion" },
+      { en: "proposal", fr: "proposition" },
+      { en: "propose", fr: "proposer" },
+      { en: "proposed", fr: "proposé" },
+      { en: "prosecutor", fr: "procureur" },
+      { en: "prospect", fr: "perspective" },
+      { en: "protect", fr: "protéger" },
+      { en: "protection", fr: "protection" },
+      { en: "protein", fr: "protéine" },
+      { en: "protest", fr: "protestation" },
+      { en: "proud", fr: "fier" },
+      { en: "prove", fr: "prouver" },
+      { en: "provide", fr: "fournir" },
+      { en: "provider", fr: "fournisseur" },
+      { en: "province", fr: "province" },
+      { en: "provision", fr: "disposition" },
+      { en: "psychological", fr: "psychologique" },
+      { en: "psychologist", fr: "psychologue" },
+      { en: "psychology", fr: "psychologie" },
+      { en: "public", fr: "public" },
+      { en: "publication", fr: "publication" },
+      { en: "publicly", fr: "publiquement" },
+      { en: "publish", fr: "publier" },
+      { en: "publisher", fr: "éditeur" },
+      { en: "pull", fr: "tirer" },
+      { en: "punishment", fr: "punition" },
+      { en: "purchase", fr: "achat" },
+      { en: "pure", fr: "pur" },
+      { en: "purpose", fr: "but" },
+      { en: "pursue", fr: "poursuivre" },
+      { en: "push", fr: "pousser" },
+      { en: "put", fr: "mettre" },
+      { en: "qualify", fr: "se qualifier" },
+      { en: "quality", fr: "qualité" },
+      { en: "quarter", fr: "quartier" },
+      { en: "quarterback", fr: "quart-arrière" },
+      { en: "question", fr: "question" },
+      { en: "quick", fr: "rapide" },
+      { en: "quickly", fr: "rapidement" },
+      { en: "quiet", fr: "silencieux" },
+      { en: "quietly", fr: "silencieusement" },
+      { en: "quit", fr: "quitter" },
+      { en: "quite", fr: "assez" },
+      { en: "quote", fr: "citer" },
+      { en: "race", fr: "course" },
+      { en: "racial", fr: "racial" },
+      { en: "radical", fr: "radical" },
+      { en: "radio", fr: "radio" },
+      { en: "rail", fr: "rail" },
+      { en: "rain", fr: "pluie" },
+      { en: "raise", fr: "élever" },
+      { en: "range", fr: "gamme" },
+      { en: "rank", fr: "rang" },
+      { en: "rapid", fr: "rapide" },
+      { en: "rapidly", fr: "rapidement" },
+      { en: "rare", fr: "rare" },
+      { en: "rarely", fr: "rarement" },
+      { en: "rate", fr: "taux" },
+      { en: "rather", fr: "plutôt" },
+      { en: "rating", fr: "évaluation" },
+      { en: "ratio", fr: "ratio" },
+      { en: "raw", fr: "cru" },
+      { en: "reach", fr: "atteindre" },
+      { en: "react", fr: "réagir" },
+      { en: "reaction", fr: "réaction" },
+      { en: "read", fr: "lire" },
+      { en: "reader", fr: "lecteur" },
+      { en: "reading", fr: "lecture" },
+      { en: "ready", fr: "prêt" },
+      { en: "real", fr: "réel" },
+      { en: "reality", fr: "réalité" },
+      { en: "realize", fr: "réaliser" },
+      { en: "really", fr: "vraiment" },
+      { en: "reason", fr: "raison" },
+      { en: "reasonable", fr: "raisonnable" },
+      { en: "recall", fr: "rappeler" },
+      { en: "receive", fr: "recevoir" },
+      { en: "recent", fr: "récent" },
+      { en: "recently", fr: "récemment" },
+      { en: "recipe", fr: "recette" },
+      { en: "recognition", fr: "reconnaissance" },
+      { en: "recognize", fr: "reconnaître" },
+      { en: "recommend", fr: "recommander" },
+      { en: "recommendation", fr: "recommandation" },
+      { en: "record", fr: "enregistrer" },
+      { en: "recording", fr: "enregistrement" },
+      { en: "recover", fr: "récupérer" },
+      { en: "recovery", fr: "récupération" },
+      { en: "recruit", fr: "recruter" },
+      { en: "red", fr: "rouge" },
+      { en: "reduce", fr: "réduire" },
+      { en: "reduction", fr: "réduction" },
+      { en: "refer", fr: "référer" },
+      { en: "reference", fr: "référence" },
+      { en: "reflect", fr: "refléter" },
+      { en: "reflection", fr: "réflexion" },
+      { en: "reform", fr: "réforme" },
+      { en: "refrigerator", fr: "réfrigérateur" },
+      { en: "refuse", fr: "refuser" },
+      { en: "regard", fr: "considérer" },
+      { en: "regarding", fr: "concernant" },
+      { en: "regardless", fr: "indépendamment" },
+      { en: "regime", fr: "régime" },
+      { en: "region", fr: "région" },
+      { en: "regional", fr: "régional" },
+      { en: "register", fr: "s'inscrire" },
+      { en: "regular", fr: "régulier" },
+      { en: "regularly", fr: "régulièrement" },
+      { en: "regulate", fr: "réguler" },
+      { en: "regulation", fr: "régulation" },
+      { en: "reinforce", fr: "renforcer" },
+      { en: "reject", fr: "rejeter" },
+      { en: "relate", fr: "relier" },
+      { en: "relation", fr: "relation" },
+      { en: "relationship", fr: "relation" },
+      { en: "relative", fr: "relatif" },
+      { en: "relatively", fr: "relativement" },
+      { en: "relax", fr: "se détendre" },
+      { en: "release", fr: "libérer" },
+      { en: "relevant", fr: "pertinent" },
+      { en: "relief", fr: "soulagement" },
+      { en: "religion", fr: "religion" },
+      { en: "religious", fr: "religieux" },
+      { en: "rely", fr: "compter sur" },
+      { en: "remain", fr: "rester" },
+      { en: "remaining", fr: "restant" },
+      { en: "remarkable", fr: "remarquable" },
+      { en: "remember", fr: "se souvenir" },
+      { en: "remind", fr: "rappeler" },
+      { en: "remote", fr: "télécommande" },
+      { en: "remove", fr: "enlever" },
+      { en: "repeat", fr: "répéter" },
+      { en: "repeatedly", fr: "repeatedly" },
+      { en: "replace", fr: "remplacer" },
+      { en: "reply", fr: "répondre" },
+      { en: "report", fr: "rapport" },
+      { en: "reporter", fr: "journaliste" },
+      { en: "represent", fr: "représenter" },
+      { en: "representation", fr: "représentation" },
+      { en: "representative", fr: "représentant" },
+      { en: "Republican", fr: "républicain" },
+      { en: "reputation", fr: "réputation" },
+      { en: "request", fr: "demande" },
+      { en: "require", fr: "exiger" },
+      { en: "requirement", fr: "exigence" },
+      { en: "research", fr: "recherche" },
+      { en: "researcher", fr: "chercheur" },
+      { en: "resemble", fr: "ressembler" },
+      { en: "reservation", fr: "réservation" },
+      { en: "resident", fr: "résident" },
+      { en: "resist", fr: "résister" },
+      { en: "resistance", fr: "résistance" },
+      { en: "resolution", fr: "résolution" },
+      { en: "resolve", fr: "résoudre" },
+      { en: "resort", fr: "station" },
+      { en: "resource", fr: "ressource" },
+      { en: "respect", fr: "respect" },
+      { en: "respond", fr: "répondre" },
+      { en: "respondent", fr: "répondant" },
+      { en: "response", fr: "réponse" },
+      { en: "responsibility", fr: "responsabilité" },
+      { en: "responsible", fr: "responsable" },
+      { en: "rest", fr: "repos" },
+      { en: "restaurant", fr: "restaurant" },
+      { en: "restore", fr: "restaurer" },
+      { en: "restriction", fr: "restriction" },
+      { en: "result", fr: "résultat" },
+      { en: "retain", fr: "retenir" },
+      { en: "retire", fr: "prendre sa retraite" },
+      { en: "retirement", fr: "retraite" },
+      { en: "return", fr: "retourner" },
+      { en: "reveal", fr: "révéler" },
+      { en: "revenue", fr: "revenu" },
+      { en: "review", fr: "examen" },
+      { en: "revolution", fr: "révolution" },
+      { en: "rhythm", fr: "rythme" },
+      { en: "rice", fr: "riz" },
+      { en: "rich", fr: "riche" },
+      { en: "rid", fr: "débarrasser" },
+      { en: "ride", fr: "monter" },
+      { en: "rifle", fr: "fusil" },
+      { en: "right", fr: "droit" },
+      { en: "ring", fr: "bague" },
+      { en: "rise", fr: "monter" },
+      { en: "risk", fr: "risque" },
+      { en: "river", fr: "rivière" },
+      { en: "road", fr: "route" },
+      { en: "rock", fr: "rocher" },
+      { en: "role", fr: "rôle" },
+      { en: "roll", fr: "rouler" },
+      { en: "romantic", fr: "romantique" },
+      { en: "roof", fr: "toit" },
+      { en: "room", fr: "chambre" },
+      { en: "root", fr: "racine" },
+      { en: "rope", fr: "corde" },
+      { en: "rose", fr: "rose" },
+      { en: "rough", fr: "rugueux" },
+      { en: "roughly", fr: "approximativement" },
+      { en: "round", fr: "rond" },
+      { en: "route", fr: "itinéraire" },
+      { en: "routine", fr: "routine" },
+      { en: "row", fr: "rangée" },
+      { en: "rub", fr: "frotter" },
+      { en: "rule", fr: "règle" },
+      { en: "run", fr: "courir" },
+      { en: "running", fr: "en cours" },
+      { en: "rural", fr: "rural" },
+      { en: "rush", fr: "se précipiter" },
+      { en: "Russian", fr: "russe" },
+      { en: "sacred", fr: "sacré" },
+      { en: "sad", fr: "triste" },
+      { en: "safe", fr: "sûr" },
+      { en: "safety", fr: "sécurité" },
+      { en: "sake", fr: "intérêt" },
+      { en: "salad", fr: "salade" },
+      { en: "salary", fr: "salaire" },
+      { en: "sale", fr: "vente" },
+      { en: "sales", fr: "ventes" },
+      { en: "salt", fr: "sel" },
+      { en: "same", fr: "même" },
+      { en: "sample", fr: "échantillon" },
+      { en: "sanction", fr: "sanction" },
+      { en: "sand", fr: "sable" },
+      { en: "satellite", fr: "satellite" },
+      { en: "satisfaction", fr: "satisfaction" },
+      { en: "satisfy", fr: "satisfaire" },
+      { en: "sauce", fr: "sauce" },
+      { en: "save", fr: "sauver" },
+      { en: "saving", fr: "économie" },
+      { en: "say", fr: "dire" },
+      { en: "scale", fr: "échelle" },
+      { en: "scandal", fr: "scandale" },
+      { en: "scared", fr: "effrayé" },
+      { en: "scenario", fr: "scénario" },
+      { en: "scene", fr: "scène" },
+      { en: "schedule", fr: "programme" },
+      { en: "scheme", fr: "schéma" },
+      { en: "scholar", fr: "érudit" },
+      { en: "scholarship", fr: "bourse" },
+      { en: "school", fr: "école" },
+      { en: "science", fr: "science" },
+      { en: "scientific", fr: "scientifique" },
+      { en: "scientist", fr: "scientifique" },
+      { en: "scope", fr: "portée" },
+      { en: "score", fr: "score" },
+      { en: "scream", fr: "crier" },
+      { en: "screen", fr: "écran" },
+      { en: "script", fr: "scénario" },
+      { en: "sea", fr: "mer" },
+      { en: "search", fr: "recherche" },
+      { en: "season", fr: "saison" },
+      { en: "seat", fr: "siège" },
+      { en: "second", fr: "deuxième" },
+      { en: "secret", fr: "secret" },
+      { en: "secretary", fr: "secrétaire" },
+      { en: "section", fr: "section" },
+      { en: "sector", fr: "secteur" },
+      { en: "secure", fr: "sécuriser" },
+      { en: "security", fr: "sécurité" },
+      { en: "see", fr: "voir" },
+      { en: "seed", fr: "graine" },
+      { en: "seek", fr: "chercher" },
+      { en: "seem", fr: "sembler" },
+      { en: "segment", fr: "segment" },
+      { en: "seize", fr: "saisir" },
+      { en: "select", fr: "sélectionner" },
+      { en: "selection", fr: "sélection" },
+      { en: "self", fr: "soi-même" },
+      { en: "sell", fr: "vendre" },
+      { en: "Senate", fr: "Sénat" },
+      { en: "senator", fr: "sénateur" },
+      { en: "send", fr: "envoyer" },
+      { en: "senior", fr: "aîné" },
+      { en: "sense", fr: "sens" },
+      { en: "sensitive", fr: "sensible" },
+      { en: "sentence", fr: "phrase" },
+      { en: "separate", fr: "séparer" },
+      { en: "sequence", fr: "séquence" },
+      { en: "series", fr: "série" },
+      { en: "serious", fr: "sérieux" },
+      { en: "seriously", fr: "sérieusement" },
+      { en: "serve", fr: "servir" },
+      { en: "service", fr: "service" },
+      { en: "session", fr: "session" },
+      { en: "set", fr: "ensemble" },
+      { en: "setting", fr: "réglage" },
+      { en: "settle", fr: "régler" },
+      { en: "settlement", fr: "règlement" },
+      { en: "seven", fr: "sept" },
+      { en: "several", fr: "plusieurs" },
+      { en: "severe", fr: "sévère" },
+      { en: "sex", fr: "sexe" },
+      { en: "sexual", fr: "sexuel" },
+      { en: "shade", fr: "ombre" },
+      { en: "shadow", fr: "ombre" },
+      { en: "shake", fr: "secouer" },
+      { en: "shall", fr: "devra" },
+      { en: "shape", fr: "forme" },
+      { en: "share", fr: "partager" },
+      { en: "sharp", fr: "tranchant" },
+      { en: "she", fr: "elle" },
+      { en: "sheet", fr: "feuille" },
+      { en: "shelf", fr: "étagère" },
+      { en: "shell", fr: "coquille" },
+      { en: "shelter", fr: "abri" },
+      { en: "shift", fr: "changement" },
+      { en: "shine", fr: "briller" },
+      { en: "ship", fr: "navire" },
+      { en: "shirt", fr: "chemise" },
+      { en: "shit", fr: "merde" },
+      { en: "shock", fr: "choc" },
+      { en: "shoe", fr: "chaussure" },
+      { en: "shoot", fr: "tirer" },
+      { en: "shooting", fr: "tir" },
+      { en: "shop", fr: "magasin" },
+      { en: "shopping", fr: "achats" },
+      { en: "shore", fr: "rivage" },
+      { en: "short", fr: "court" },
+      { en: "shortly", fr: "bientôt" },
+      { en: "shot", fr: "tir" },
+      { en: "should", fr: "devrait" },
+      { en: "shoulder", fr: "épaule" },
+      { en: "shout", fr: "crier" },
+      { en: "show", fr: "montrer" },
+      { en: "shower", fr: "douche" },
+      { en: "shrug", fr: "hausser les épaules" },
+      { en: "shut", fr: "fermer" },
+      { en: "sick", fr: "malade" },
+      { en: "side", fr: "côté" },
+      { en: "sigh", fr: "soupirer" },
+      { en: "sight", fr: "vue" },
+      { en: "sign", fr: "signe" },
+      { en: "signal", fr: "signal" },
+      { en: "significance", fr: "signification" },
+      { en: "significant", fr: "significatif" },
+      { en: "significantly", fr: "significativement" },
+      { en: "silence", fr: "silence" },
+      { en: "silent", fr: "silencieux" },
+      { en: "silver", fr: "argent" },
+      { en: "similar", fr: "similaire" },
+      { en: "similarly", fr: "de même" },
+      { en: "simple", fr: "simple" },
+      { en: "simply", fr: "simplement" },
+      { en: "sin", fr: "péché" },
+      { en: "since", fr: "depuis" },
+      { en: "sing", fr: "chanter" },
+      { en: "singer", fr: "chanteur" },
+      { en: "single", fr: "célibataire" },
+      { en: "sink", fr: "couler" },
+      { en: "sir", fr: "monsieur" },
+      { en: "sister", fr: "sœur" },
+      { en: "sit", fr: "s'asseoir" },
+      { en: "site", fr: "site" },
+      { en: "situation", fr: "situation" },
+      { en: "six", fr: "six" },
+      { en: "size", fr: "taille" },
+      { en: "ski", fr: "ski" },
+      { en: "skill", fr: "compétence" },
+      { en: "skin", fr: "peau" },
+      { en: "sky", fr: "ciel" },
+      { en: "slave", fr: "esclave" },
+      { en: "sleep", fr: "dormir" },
+      { en: "slice", fr: "tranche" },
+      { en: "slide", fr: "glisser" },
+      { en: "slight", fr: "léger" },
+      { en: "slightly", fr: "légèrement" },
+      { en: "slip", fr: "glisser" },
+      { en: "slow", fr: "lent" },
+      { en: "slowly", fr: "lentement" },
+      { en: "small", fr: "petit" },
+      { en: "smart", fr: "intelligent" },
+      { en: "smell", fr: "odeur" },
+      { en: "smile", fr: "sourire" },
+      { en: "smoke", fr: "fumer" },
+      { en: "smooth", fr: "lisse" },
+      { en: "snap", fr: "claquer" },
+      { en: "snow", fr: "neige" },
+      { en: "so", fr: "donc" },
+      { en: "so-called", fr: "soi-disant" },
+      { en: "soccer", fr: "football" },
+      { en: "social", fr: "social" },
+      { en: "society", fr: "société" },
+      { en: "soft", fr: "doux" },
+      { en: "software", fr: "logiciel" },
+      { en: "soil", fr: "sol" },
+      { en: "solar", fr: "solaire" },
+      { en: "soldier", fr: "soldat" },
+      { en: "solid", fr: "solide" },
+      { en: "solution", fr: "solution" },
+      { en: "solve", fr: "résoudre" },
+      { en: "some", fr: "quelques" },
+      { en: "somebody", fr: "quelqu'un" },
+      { en: "somehow", fr: "d'une certaine manière" },
+      { en: "someone", fr: "quelqu'un" },
+      { en: "something", fr: "quelque chose" },
+      { en: "sometimes", fr: "parfois" },
+      { en: "somewhat", fr: "quelque peu" },
+      { en: "somewhere", fr: "quelque part" },
+      { en: "son", fr: "fils" },
+      { en: "song", fr: "chanson" },
+      { en: "soon", fr: "bientôt" },
+      { en: "sophisticated", fr: "sophistiqué" },
+      { en: "sorry", fr: "désolé" },
+      { en: "sort", fr: "trier" },
+      { en: "soul", fr: "âme" },
+      { en: "sound", fr: "son" },
+      { en: "soup", fr: "soupe" },
+      { en: "source", fr: "source" },
+      { en: "south", fr: "sud" },
+      { en: "southern", fr: "du sud" },
+      { en: "Soviet", fr: "soviétique" },
+      { en: "space", fr: "espace" },
+      { en: "Spanish", fr: "espagnol" },
+      { en: "speak", fr: "parler" },
+      { en: "speaker", fr: "haut-parleur" },
+      { en: "special", fr: "spécial" },
+      { en: "specialist", fr: "spécialiste" },
+      { en: "species", fr: "espèce" },
+      { en: "specific", fr: "spécifique" },
+      { en: "specifically", fr: "spécifiquement" },
+      { en: "speech", fr: "discours" },
+      { en: "speed", fr: "vitesse" },
+      { en: "spend", fr: "dépenser" },
+      { en: "spending", fr: "dépenses" },
+      { en: "spin", fr: "tourner" },
+      { en: "spirit", fr: "esprit" },
+      { en: "spiritual", fr: "spirituel" },
+      { en: "split", fr: "diviser" },
+      { en: "spokesman", fr: "porte-parole" },
+      { en: "sport", fr: "sport" },
+      { en: "spot", fr: "endroit" },
+      { en: "spread", fr: "étaler" },
+      { en: "spring", fr: "printemps" },
+      { en: "square", fr: "carré" },
+      { en: "squeeze", fr: "serrer" },
+      { en: "stability", fr: "stabilité" },
+      { en: "stable", fr: "stable" },
+      { en: "staff", fr: "personnel" },
+      { en: "stage", fr: "scène" },
+      { en: "stair", fr: "escalier" },
+      { en: "stake", fr: "enjeu" },
+      { en: "stand", fr: "se tenir debout" },
+      { en: "standard", fr: "norme" },
+      { en: "standing", fr: "debout" },
+      { en: "star", fr: "étoile" },
+      { en: "stare", fr: "fixer" },
+      { en: "start", fr: "commencer" },
+      { en: "state", fr: "état" },
+      { en: "statement", fr: "déclaration" },
+      { en: "station", fr: "station" },
+      { en: "statistics", fr: "statistiques" },
+      { en: "status", fr: "statut" },
+      { en: "stay", fr: "rester" },
+      { en: "steady", fr: "stable" },
+      { en: "steal", fr: "voler" },
+      { en: "steel", fr: "acier" },
+      { en: "step", fr: "pas" },
+      { en: "stick", fr: "bâton" },
+      { en: "still", fr: "encore" },
+      { en: "stir", fr: "remuer" },
+      { en: "stock", fr: "stock" },
+      { en: "stomach", fr: "estomac" },
+      { en: "stone", fr: "pierre" },
+      { en: "stop", fr: "arrêter" },
+      { en: "storage", fr: "stockage" },
+      { en: "store", fr: "magasin" },
+      { en: "storm", fr: "tempête" },
+      { en: "story", fr: "histoire" },
+      { en: "straight", fr: "droit" },
+      { en: "strange", fr: "étrange" },
+      { en: "stranger", fr: "étranger" },
+      { en: "strategic", fr: "stratégique" },
+      { en: "strategy", fr: "stratégie" },
+      { en: "stream", fr: "ruisseau" },
+      { en: "street", fr: "rue" },
+      { en: "strength", fr: "force" },
+      { en: "strengthen", fr: "renforcer" },
+      { en: "stress", fr: "stress" },
+      { en: "stretch", fr: "étirer" },
+      { en: "strike", fr: "grève" },
+      { en: "string", fr: "corde" },
+      { en: "strip", fr: "bande" },
+      { en: "stroke", fr: "caresse" },
+      { en: "strong", fr: "fort" },
+      { en: "strongly", fr: "fortement" },
+      { en: "structure", fr: "structure" },
+      { en: "struggle", fr: "lutte" },
+      { en: "student", fr: "étudiant" },
+      { en: "studio", fr: "studio" },
+      { en: "study", fr: "étudier" },
+      { en: "stuff", fr: "truc" },
+      { en: "stupid", fr: "stupide" },
+      { en: "style", fr: "style" },
+      { en: "subject", fr: "sujet" },
+      { en: "submit", fr: "soumettre" },
+      { en: "subsequent", fr: "ultérieur" },
+      { en: "substance", fr: "substance" },
+      { en: "substantial", fr: "substantiel" },
+      { en: "succeed", fr: "réussir" },
+      { en: "success", fr: "succès" },
+      { en: "successful", fr: "réussi" },
+      { en: "successfully", fr: "avec succès" },
+      { en: "such", fr: "tel" },
+      { en: "sudden", fr: "soudain" },
+      { en: "suddenly", fr: "soudainement" },
+      { en: "sue", fr: "poursuivre" },
+      { en: "suffer", fr: "souffrir" },
+      { en: "sufficient", fr: "suffisant" },
+      { en: "sugar", fr: "sucre" },
+      { en: "suggest", fr: "suggérer" },
+      { en: "suggestion", fr: "suggestion" },
+      { en: "suicide", fr: "suicide" },
+      { en: "suit", fr: "costume" },
+      { en: "summer", fr: "été" },
+      { en: "summit", fr: "sommet" },
+      { en: "sun", fr: "soleil" },
+      { en: "super", fr: "super" },
+      { en: "supply", fr: "fournir" },
+      { en: "support", fr: "soutenir" },
+      { en: "supporter", fr: "supporter" },
+      { en: "suppose", fr: "supposer" },
+      { en: "supposed", fr: "censé" },
+      { en: "Supreme", fr: "suprême" },
+      { en: "sure", fr: "sûr" },
+      { en: "surely", fr: "sûrement" },
+      { en: "surface", fr: "surface" },
+      { en: "surgery", fr: "chirurgie" },
+      { en: "surprise", fr: "surprendre" },
+      { en: "surprised", fr: "surpris" },
+      { en: "surprising", fr: "surprenant" },
+      { en: "surprisingly", fr: "étonnamment" },
+      { en: "surround", fr: "entourer" },
+      { en: "survey", fr: "enquête" },
+      { en: "survival", fr: "survie" },
+      { en: "survive", fr: "survivre" },
+      { en: "survivor", fr: "survivant" },
+      { en: "suspect", fr: "suspect" },
+      { en: "sustain", fr: "soutenir" },
+      { en: "swear", fr: "jurer" },
+      { en: "sweep", fr: "balayer" },
+      { en: "sweet", fr: "doux" },
+      { en: "swim", fr: "nager" },
+      { en: "swing", fr: "balancer" },
+      { en: "switch", fr: "interrupteur" },
+      { en: "symbol", fr: "symbole" },
+      { en: "symptom", fr: "symptôme" },
+      { en: "system", fr: "système" },
+      { en: "table", fr: "table" },
+      { en: "tablespoon", fr: "cuillère à soupe" },
+      { en: "tactic", fr: "tactique" },
+      { en: "tail", fr: "queue" },
+      { en: "take", fr: "prendre" },
+      { en: "tale", fr: "conte" },
+      { en: "talent", fr: "talent" },
+      { en: "talk", fr: "parler" },
+      { en: "tall", fr: "grand" },
+      { en: "tank", fr: "réservoir" },
+      { en: "tap", fr: "robinet" },
+      { en: "tape", fr: "ruban" },
+      { en: "target", fr: "cible" },
+      { en: "task", fr: "tâche" },
+      { en: "taste", fr: "goût" },
+      { en: "tax", fr: "impôt" },
+      { en: "taxpayer", fr: "contribuable" },
+      { en: "tea", fr: "thé" },
+      { en: "teach", fr: "enseigner" },
+      { en: "teacher", fr: "enseignant" },
+      { en: "teaching", fr: "enseignement" },
+      { en: "team", fr: "équipe" },
+      { en: "tear", fr: "larme" },
+      { en: "teaspoon", fr: "cuillère à café" },
+      { en: "technical", fr: "technique" },
+      { en: "technique", fr: "technique" },
+      { en: "technology", fr: "technologie" },
+      { en: "teen", fr: "adolescent" },
+      { en: "teenager", fr: "adolescent" },
+      { en: "telephone", fr: "téléphone" },
+      { en: "telescope", fr: "télescope" },
+      { en: "television", fr: "télévision" },
+      { en: "tell", fr: "dire" },
+      { en: "temperature", fr: "température" },
+      { en: "temporary", fr: "temporaire" },
+      { en: "ten", fr: "dix" },
+      { en: "tend", fr: "avoir tendance" },
+      { en: "tendency", fr: "tendance" },
+      { en: "tennis", fr: "tennis" },
+      { en: "tension", fr: "tension" },
+      { en: "tent", fr: "tente" },
+      { en: "term", fr: "terme" },
+      { en: "terms", fr: "conditions" },
+      { en: "terrible", fr: "terrible" },
+      { en: "territory", fr: "territoire" },
+      { en: "terror", fr: "terreur" },
+      { en: "terrorism", fr: "terrorisme" },
+      { en: "terrorist", fr: "terroriste" },
+      { en: "test", fr: "test" },
+      { en: "testify", fr: "témoigner" },
+      { en: "testimony", fr: "témoignage" },
+      { en: "testing", fr: "essai" },
+      { en: "text", fr: "texte" },
+      { en: "than", fr: "que" },
+      { en: "thank", fr: "remercier" },
+      { en: "thanks", fr: "merci" },
+      { en: "that", fr: "que" },
+      { en: "the", fr: "le" },
+      { en: "theater", fr: "théâtre" },
+      { en: "their", fr: "leur" },
+      { en: "them", fr: "eux" },
+      { en: "theme", fr: "thème" },
+      { en: "themselves", fr: "eux-mêmes" },
+      { en: "then", fr: "alors" },
+      { en: "theory", fr: "théorie" },
+      { en: "therapy", fr: "thérapie" },
+      { en: "there", fr: "là" },
+      { en: "therefore", fr: "donc" },
+      { en: "these", fr: "ces" },
+      { en: "they", fr: "ils" },
+      { en: "thick", fr: "épais" },
+      { en: "thin", fr: "mince" },
+      { en: "thing", fr: "chose" },
+      { en: "think", fr: "penser" },
+      { en: "thinking", fr: "pensée" },
+      { en: "third", fr: "troisième" },
+      { en: "thirty", fr: "trente" },
+      { en: "this", fr: "ce" },
+      { en: "those", fr: "ceux" },
+      { en: "though", fr: "bien que" },
+      { en: "thought", fr: "pensée" },
+      { en: "thousand", fr: "mille" },
+      { en: "threat", fr: "menace" },
+      { en: "threaten", fr: "menacer" },
+      { en: "three", fr: "trois" },
+      { en: "throat", fr: "gorge" },
+      { en: "through", fr: "à travers" },
+      { en: "throughout", fr: "tout au long de" },
+      { en: "throw", fr: "jeter" },
+      { en: "thus", fr: "ainsi" },
+      { en: "ticket", fr: "billet" },
+      { en: "tie", fr: "cravate" },
+      { en: "tight", fr: "serré" },
+      { en: "time", fr: "temps" },
+      { en: "tiny", fr: "minuscule" },
+      { en: "tip", fr: "pourboire" },
+      { en: "tire", fr: "pneu" },
+      { en: "tired", fr: "fatigué" },
+      { en: "tissue", fr: "tissu" },
+      { en: "title", fr: "titre" },
+      { en: "to", fr: "à" },
+      { en: "tobacco", fr: "tabac" },
+      { en: "today", fr: "aujourd'hui" },
+      { en: "toe", fr: "orteil" },
+      { en: "together", fr: "ensemble" },
+      { en: "tomato", fr: "tomate" },
+      { en: "tomorrow", fr: "demain" },
+      { en: "tone", fr: "ton" },
+      { en: "tongue", fr: "langue" },
+      { en: "tonight", fr: "ce soir" },
+      { en: "too", fr: "trop" },
+      { en: "tool", fr: "outil" },
+      { en: "tooth", fr: "dent" },
+      { en: "top", fr: "haut" },
+      { en: "topic", fr: "sujet" },
+      { en: "toss", fr: "lancer" },
+      { en: "total", fr: "total" },
+      { en: "totally", fr: "totalement" },
+      { en: "touch", fr: "toucher" },
+      { en: "tough", fr: "difficile" },
+      { en: "tour", fr: "tour" },
+      { en: "tourist", fr: "touriste" },
+      { en: "tournament", fr: "tournoi" },
+      { en: "toward", fr: "vers" },
+      { en: "towards", fr: "vers" },
+      { en: "tower", fr: "tour" },
+      { en: "town", fr: "ville" },
+      { en: "toy", fr: "jouet" },
+      { en: "trace", fr: "trace" },
+      { en: "track", fr: "piste" },
+      { en: "trade", fr: "commerce" },
+      { en: "tradition", fr: "tradition" },
+      { en: "traditional", fr: "traditionnel" },
+      { en: "traffic", fr: "trafic" },
+      { en: "tragedy", fr: "tragédie" },
+      { en: "trail", fr: "sentier" },
+      { en: "train", fr: "entraîner" },
+      { en: "training", fr: "formation" },
+      { en: "transfer", fr: "transfert" },
+      { en: "transform", fr: "transformer" },
+      { en: "transformation", fr: "transformation" },
+      { en: "transition", fr: "transition" },
+      { en: "translate", fr: "traduire" },
+      { en: "transportation", fr: "transport" },
+      { en: "travel", fr: "voyager" },
+      { en: "treat", fr: "traiter" },
+      { en: "treatment", fr: "traitement" },
+      { en: "treaty", fr: "traité" },
+      { en: "tree", fr: "arbre" },
+      { en: "tremendous", fr: "énorme" },
+      { en: "trend", fr: "tendance" },
+      { en: "trial", fr: "procès" },
+      { en: "tribe", fr: "tribu" },
+      { en: "trick", fr: "tromper" },
+      { en: "trip", fr: "voyage" },
+      { en: "troop", fr: "troupe" },
+      { en: "trouble", fr: "problème" },
+      { en: "truck", fr: "camion" },
+      { en: "true", fr: "vrai" },
+      { en: "truly", fr: "vraiment" },
+      { en: "trust", fr: "confiance" },
+      { en: "truth", fr: "vérité" },
+      { en: "try", fr: "essayer" },
+      { en: "tube", fr: "tube" },
+      { en: "tunnel", fr: "tunnel" },
+      { en: "turn", fr: "tourner" },
+      { en: "TV", fr: "télévision" },
+      { en: "twelve", fr: "douze" },
+      { en: "twenty", fr: "vingt" },
+      { en: "twice", fr: "deux fois" },
+      { en: "twin", fr: "jumeau" },
+      { en: "two", fr: "deux" },
+      { en: "type", fr: "type" },
+      { en: "typical", fr: "typique" },
+      { en: "typically", fr: "typiquement" },
+      { en: "ugly", fr: "laid" },
+      { en: "ultimate", fr: "ultime" },
+      { en: "ultimately", fr: "finalement" },
+      { en: "unable", fr: "incapable" },
+      { en: "uncle", fr: "oncle" },
+      { en: "under", fr: "sous" },
+      { en: "undergo", fr: "subir" },
+      { en: "understand", fr: "comprendre" },
+      { en: "understanding", fr: "compréhension" },
+      { en: "unfortunately", fr: "malheureusement" },
+      { en: "uniform", fr: "uniforme" },
+      { en: "union", fr: "union" },
+      { en: "unique", fr: "unique" },
+      { en: "unit", fr: "unité" },
+      { en: "United", fr: "uni" },
+      { en: "universal", fr: "universel" },
+      { en: "universe", fr: "univers" },
+      { en: "university", fr: "université" },
+      { en: "unknown", fr: "inconnu" },
+      { en: "unless", fr: "à moins que" },
+      { en: "unlike", fr: "contrairement à" },
+      { en: "unlikely", fr: "improbable" },
+      { en: "until", fr: "jusqu'à" },
+      { en: "unusual", fr: "inhabituel" },
+      { en: "up", fr: "en haut" },
+      { en: "upon", fr: "sur" },
+      { en: "upper", fr: "supérieur" },
+      { en: "urban", fr: "urbain" },
+      { en: "urge", fr: "urgence" },
+      { en: "us", fr: "nous" },
+      { en: "use", fr: "utiliser" },
+      { en: "used", fr: "utilisé" },
+      { en: "useful", fr: "utile" },
+      { en: "user", fr: "utilisateur" },
+      { en: "usual", fr: "habituel" },
+      { en: "usually", fr: "habituellement" },
+      { en: "utility", fr: "utilité" },
+      { en: "vacation", fr: "vacances" },
+      { en: "valley", fr: "vallée" },
+      { en: "valuable", fr: "précieux" },
+      { en: "value", fr: "valeur" },
+      { en: "variable", fr: "variable" },
+      { en: "variation", fr: "variation" },
+      { en: "variety", fr: "variété" },
+      { en: "various", fr: "divers" },
+      { en: "vary", fr: "varier" },
+      { en: "vast", fr: "vaste" },
+      { en: "vegetable", fr: "légume" },
+      { en: "vehicle", fr: "véhicule" },
+      { en: "venture", fr: "entreprise" },
+      { en: "version", fr: "version" },
+      { en: "versus", fr: "contre" },
+      { en: "very", fr: "très" },
+      { en: "vessel", fr: "vaisseau" },
+      { en: "veteran", fr: "vétéran" },
+      { en: "via", fr: "via" },
+      { en: "victim", fr: "victime" },
+      { en: "victory", fr: "victoire" },
+      { en: "video", fr: "vidéo" },
+      { en: "view", fr: "vue" },
+      { en: "viewer", fr: "téléspectateur" },
+      { en: "village", fr: "village" },
+      { en: "violate", fr: "violer" },
+      { en: "violation", fr: "violation" },
+      { en: "violence", fr: "violence" },
+      { en: "violent", fr: "violent" },
+      { en: "virtually", fr: "virtuellement" },
+      { en: "virtue", fr: "vertu" },
+      { en: "virus", fr: "virus" },
+      { en: "visible", fr: "visible" },
+      { en: "vision", fr: "vision" },
+      { en: "visit", fr: "visiter" },
+      { en: "visitor", fr: "visiteur" },
+      { en: "visual", fr: "visuel" },
+      { en: "vital", fr: "vital" },
+      { en: "voice", fr: "voix" },
+      { en: "volume", fr: "volume" },
+      { en: "volunteer", fr: "bénévole" },
+      { en: "vote", fr: "vote" },
+      { en: "voter", fr: "électeur" },
+      { en: "vs", fr: "contre" },
+      { en: "vulnerable", fr: "vulnérable" },
+      { en: "wage", fr: "salaire" },
+      { en: "wait", fr: "attendre" },
+      { en: "wake", fr: "se réveiller" },
+      { en: "walk", fr: "marcher" },
+      { en: "wall", fr: "mur" },
+      { en: "wander", fr: "errer" },
+      { en: "want", fr: "vouloir" },
+      { en: "war", fr: "guerre" },
+      { en: "warm", fr: "chaud" },
+      { en: "warn", fr: "avertir" },
+      { en: "warning", fr: "avertissement" },
+      { en: "wash", fr: "laver" },
+      { en: "waste", fr: "gaspiller" },
+      { en: "watch", fr: "regarder" },
+      { en: "water", fr: "eau" },
+      { en: "wave", fr: "vague" },
+      { en: "way", fr: "chemin" },
+      { en: "we", fr: "nous" },
+      { en: "weak", fr: "faible" },
+      { en: "wealth", fr: "richesse" },
+      { en: "wealthy", fr: "riche" },
+      { en: "weapon", fr: "arme" },
+      { en: "wear", fr: "porter" },
+      { en: "weather", fr: "temps" },
+      { en: "wedding", fr: "mariage" },
+      { en: "week", fr: "semaine" },
+      { en: "weekend", fr: "week-end" },
+      { en: "weekly", fr: "hebdomadaire" },
+      { en: "weigh", fr: "peser" },
+      { en: "weight", fr: "poids" },
+      { en: "welcome", fr: "bienvenue" },
+      { en: "welfare", fr: "bien-être" },
+      { en: "well", fr: "bien" },
+      { en: "west", fr: "ouest" },
+      { en: "western", fr: "occidental" },
+      { en: "wet", fr: "mouillé" },
+      { en: "what", fr: "quoi" },
+      { en: "whatever", fr: "quoi que" },
+      { en: "wheel", fr: "roue" },
+      { en: "when", fr: "quand" },
+      { en: "whenever", fr: "chaque fois que" },
+      { en: "where", fr: "où" },
+      { en: "whereas", fr: "alors que" },
+      { en: "whether", fr: "si" },
+      { en: "which", fr: "lequel" },
+      { en: "while", fr: "pendant que" },
+      { en: "whisper", fr: "chuchoter" },
+      { en: "white", fr: "blanc" },
+      { en: "who", fr: "qui" },
+      { en: "whole", fr: "entier" },
+      { en: "whom", fr: "qui" },
+      { en: "whose", fr: "dont" },
+      { en: "why", fr: "pourquoi" },
+      { en: "wide", fr: "large" },
+      { en: "widely", fr: "largement" },
+      { en: "widespread", fr: "répandu" },
+      { en: "wife", fr: "épouse" },
+      { en: "wild", fr: "sauvage" },
+      { en: "will", fr: "volonté" },
+      { en: "willing", fr: "disposé" },
+      { en: "win", fr: "gagner" },
+      { en: "wind", fr: "vent" },
+      { en: "window", fr: "fenêtre" },
+      { en: "wine", fr: "vin" },
+      { en: "wing", fr: "aile" },
+      { en: "winner", fr: "gagnant" },
+      { en: "winter", fr: "hiver" },
+      { en: "wipe", fr: "essuyer" },
+      { en: "wire", fr: "fil" },
+      { en: "wisdom", fr: "sagesse" },
+      { en: "wise", fr: "sage" },
+      { en: "wish", fr: "souhaiter" },
+      { en: "with", fr: "avec" },
+      { en: "withdraw", fr: "se retirer" },
+      { en: "within", fr: "dans" },
+      { en: "without", fr: "sans" },
+      { en: "witness", fr: "témoin" },
+      { en: "woman", fr: "femme" },
+      { en: "wonder", fr: "se demander" },
+      { en: "wonderful", fr: "merveilleux" },
+      { en: "wood", fr: "bois" },
+      { en: "wooden", fr: "en bois" },
+      { en: "word", fr: "mot" },
+      { en: "work", fr: "travail" },
+      { en: "worker", fr: "travailleur" },
+      { en: "working", fr: "travail" },
+      { en: "works", fr: "œuvres" },
+      { en: "workshop", fr: "atelier" },
+      { en: "world", fr: "monde" },
+      { en: "worried", fr: "inquiet" },
+      { en: "worry", fr: "s'inquiéter" },
+      { en: "worth", fr: "valeur" },
+      { en: "would", fr: "serait" },
+      { en: "wound", fr: "blessure" },
+      { en: "wrap", fr: "envelopper" },
+      { en: "write", fr: "écrire" },
+      { en: "writer", fr: "écrivain" },
+      { en: "writing", fr: "écriture" },
+      { en: "wrong", fr: "faux" },
+      { en: "yard", fr: "cour" },
+      { en: "yeah", fr: "ouais" },
+      { en: "year", fr: "année" },
+      { en: "yell", fr: "crier" },
+      { en: "yellow", fr: "jaune" },
+      { en: "yes", fr: "oui" },
+      { en: "yesterday", fr: "hier" },
+      { en: "yet", fr: "encore" },
+      { en: "yield", fr: "rendement" },
+      { en: "you", fr: "vous" },
+      { en: "young", fr: "jeune" },
+      { en: "your", fr: "votre" },
+      { en: "yours", fr: "le vôtre" },
+      { en: "yourself", fr: "vous-même" },
+      { en: "youth", fr: "jeunesse" },
+      { en: "zone", fr: "zone" },
+      { en: "abandon", fr: "abandonner" },
+{ en: "abandoned", fr: "abandonné" },
+{ en: "ability", fr: "capacité" },
+{ en: "able", fr: "capable" },
+{ en: "abortion", fr: "avortement" },
+{ en: "about", fr: "environ" },
+{ en: "above", fr: "au-dessus" },
+{ en: "abroad", fr: "à l'étranger" },
+{ en: "absence", fr: "absence" },
+{ en: "absent", fr: "absent" },
+{ en: "absolute", fr: "absolu" },
+{ en: "absolutely", fr: "absolument" },
+{ en: "absorb", fr: "absorber" },
+{ en: "abstract", fr: "abstrait" },
+{ en: "absurd", fr: "absurde" },
+{ en: "abundance", fr: "abondance" },
+{ en: "abuse", fr: "abus" },
+{ en: "academic", fr: "académique" },
+{ en: "academy", fr: "académie" },
+{ en: "accelerate", fr: "accélérer" },
+{ en: "accent", fr: "accent" },
+{ en: "accept", fr: "accepter" },
+{ en: "acceptable", fr: "acceptable" },
+{ en: "acceptance", fr: "acceptation" },
+    ];
+
+    /***************************************************
+     * 1.5) Afficher le nombre total
+     ***************************************************/
+    document.getElementById("dbWordCount").textContent = wordsDB.length;
+
+    /***************************************************
+     * 2) Variables globales
+     ***************************************************/
+    let currentIndex = 0;
+    let currentSeries = [];
+    let correctCount = 0;
+    let wrongCount = 0;
+    let totalWordsInSeries = 50;
+    let isEnglishToFrench = true;
+    let selectedOption = null;
+
+    /***************************************************
+     * 3) Sélection des éléments du DOM
+     ***************************************************/
+    const currentWordEl = document.getElementById("currentWord");
+    const newSeriesBtn = document.getElementById("newSeriesBtn");
+    const correctCountEl = document.getElementById("correctCount");
+    const wrongCountEl = document.getElementById("wrongCount");
+    const totalWordsEl = document.getElementById("totalWords");
+    const feedbackEl = document.getElementById("feedback");
+    const historyEl = document.getElementById("history");
+    const optionsContainer = document.getElementById("optionsContainer");
+    const progressFill = document.getElementById("progressFill");
+    const currentQuestionEl = document.getElementById("currentQuestion");
+    const totalQuestionsEl = document.getElementById("totalQuestions");
+    const darkModeToggle = document.getElementById("darkModeToggle");
+
+    /***************************************************
+     * 4) Fonctions utilitaires
+     ***************************************************/
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    /***************************************************
+     * 5) Nouvelle série
+     ***************************************************/
+    function startNewSeries() {
+      correctCount = 0;
+      wrongCount = 0;
+      correctCountEl.textContent = correctCount;
+      wrongCountEl.textContent = wrongCount;
+      totalWordsInSeries = 50;
+      totalWordsEl.textContent = totalWordsInSeries;
+      totalQuestionsEl.textContent = totalWordsInSeries;
+      
+      let shuffledWords = shuffleArray([...wordsDB]);
+      let countToPick = Math.min(totalWordsInSeries, shuffledWords.length);
+      currentSeries = shuffledWords.slice(0, countToPick);
+      currentIndex = 0;
+      historyEl.innerHTML = "";
+      
+      showNextWord();
+    }
+
+    /***************************************************
+     * 6) Afficher le mot actuel
+     ***************************************************/
+    function showNextWord() {
+      if (currentIndex >= currentSeries.length) {
+        currentWordEl.textContent = "Quiz completed!";
+        optionsContainer.innerHTML = "";
+        feedbackEl.textContent = `Final score: ${correctCount}/${totalWordsInSeries}`;
+        feedbackEl.style.color = "var(--primary)";
+        feedbackEl.style.backgroundColor = "var(--gray-100)";
+        progressFill.style.width = "100%";
+        currentQuestionEl.textContent = currentIndex;
+        return;
+      }
+      
+      feedbackEl.textContent = "";
+      feedbackEl.style.backgroundColor = "";
+      selectedOption = null;
+      
+      // Mettre à jour la progression
+      currentQuestionEl.textContent = currentIndex + 1;
+      progressFill.style.width = `${((currentIndex) / totalWordsInSeries) * 100}%`;
+      
+      isEnglishToFrench = Math.random() < 0.5;
+      const wordData = currentSeries[currentIndex];
+      currentWordEl.textContent = isEnglishToFrench ? wordData.en : wordData.fr;
+      
+      // Générer les options
+      generateOptions(wordData);
+    }
+
+    /***************************************************
+     * 7) Générer les options de réponse
+     ***************************************************/
+    function generateOptions(correctWordData) {
+      optionsContainer.innerHTML = "";
+      
+      // Créer un tableau avec la bonne réponse et 3 fausses réponses
+      const options = [correctWordData];
+      
+      // Ajouter 3 réponses incorrectes aléatoires
+      const otherWords = shuffleArray([...wordsDB]).filter(
+        word => word !== correctWordData
+      ).slice(0, 3);
+      
+      options.push(...otherWords);
+      
+      // Mélanger les options
+      const shuffledOptions = shuffleArray(options);
+      
+      // Créer les boutons d'options
+      shuffledOptions.forEach(option => {
+        const button = document.createElement("button");
+        button.className = "option-btn";
+        button.textContent = isEnglishToFrench ? option.fr : option.en;
+        button.dataset.correct = (option === correctWordData).toString();
+        
+        button.addEventListener("click", () => {
+          // Désélectionner toutes les autres options
+          document.querySelectorAll(".option-btn").forEach(btn => {
+            btn.classList.remove("selected");
+          });
+          
+          // Sélectionner cette option
+          button.classList.add("selected");
+          selectedOption = button;
+          
+          // Valider automatiquement la réponse
+          validateAnswer();
+        });
+        
+        optionsContainer.appendChild(button);
+      });
+    }
+
+    /***************************************************
+     * 8) Validation de la réponse
+     ***************************************************/
+    function validateAnswer() {
+      if (!selectedOption) return;
+      
+      const isSelectedCorrect = selectedOption.dataset.correct === "true";
+      
+      // Désactiver tous les boutons
+      document.querySelectorAll(".option-btn").forEach(btn => {
+        btn.disabled = true;
+        if (btn.dataset.correct === "true") {
+          btn.classList.add("correct");
+        } else if (btn === selectedOption && !isSelectedCorrect) {
+          btn.classList.add("incorrect");
+        }
+      });
+      
+      if (isSelectedCorrect) {
+        correctCount++;
+        correctCountEl.textContent = correctCount;
+        feedbackEl.textContent = "Correct! Well done!";
+        feedbackEl.style.color = "var(--success)";
+        feedbackEl.style.backgroundColor = "rgba(6, 214, 160, 0.1)";
+      } else {
+        wrongCount++;
+        wrongCountEl.textContent = wrongCount;
+        feedbackEl.textContent = "Incorrect! Try again!";
+        feedbackEl.style.color = "var(--danger)";
+        feedbackEl.style.backgroundColor = "rgba(239, 71, 111, 0.1)";
+      }
+      
+      // Ajouter au historique
+      const wordData = currentSeries[currentIndex];
+      addToHistory(
+        isEnglishToFrench ? wordData.en : wordData.fr,
+        selectedOption.textContent,
+        isEnglishToFrench ? wordData.fr : wordData.en,
+        isSelectedCorrect
+      );
+      
+      // Passer à la question suivante après un délai
+      setTimeout(() => {
+        currentIndex++;
+        showNextWord();
+      }, 1500);
+    }
+
+    /***************************************************
+     * 9) Ajout dans l'historique
+     ***************************************************/
+    function addToHistory(originalWord, userAnswer, correctAnswer, isCorrect) {
+      const newEntry = document.createElement("p");
+      newEntry.innerHTML = `<i class="fas ${isCorrect ? 'fa-check-circle' : 'fa-times-circle'}"></i> ${originalWord} → ${userAnswer}`;
+      newEntry.className = isCorrect ? "correct" : "incorrect";
+      historyEl.appendChild(newEntry);
+      
+      // Scroll vers le bas de l'historique
+      historyEl.scrollTop = historyEl.scrollHeight;
+    }
+
+    /***************************************************
+     * 10) Gestion des événements
+     ***************************************************/
+    newSeriesBtn.addEventListener("click", startNewSeries);
+    
+    // Dark mode toggle
+    darkModeToggle.addEventListener("change", function() {
+      if (this.checked) {
+        document.body.classList.add("dark-mode");
+        localStorage.setItem("darkMode", "enabled");
+      } else {
+        document.body.classList.remove("dark-mode");
+        localStorage.setItem("darkMode", "disabled");
+      }
+    });
+    
+    // Check for saved dark mode preference
+    if (localStorage.getItem("darkMode") === "enabled") {
+      document.body.classList.add("dark-mode");
+      darkModeToggle.checked = true;
+    }
+    
+    /***************************************************
+     * 11) Démarrage
+     ***************************************************/
+    document.addEventListener("DOMContentLoaded", startNewSeries);
+  </script>
+</body>
+</html>
